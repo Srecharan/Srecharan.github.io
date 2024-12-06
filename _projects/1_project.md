@@ -1,56 +1,42 @@
 ---
 layout: page
-title: Automated Filtering of Synthetic Training Data
+title: REX – Robot For EXtracting Leaf Samples
 importance: 1
-img: assets/img/filter.png
+img: assets/img/rex.jpg
 category: work
-related_publications: false
+related_publications: true
 ---
 
 ### Introduction
-In today's competitive manufacturing landscape, delivering products of pristine quality is paramount. For industry leaders like Apple, manual inspection is impractical given the immense scale of production. A critical challenge emerges when introducing new product lines: the lack of extensive training data for defect detection models. This data scarcity can potentially compromise quality control for novel products, directly impacting consumer satisfaction and manufacturing efficiency.
+Plant diseases contribute to a 20-40% reduction in global crop yields, making early detection crucial for agricultural sustainability and food security. The REX robot is a cyber-physical system designed to autonomously detect plant diseases and collect leaf samples for DNA analysis. Integrating advanced robotics, AI-driven imaging, and a microfluidic DNA extraction pipeline, REX enables real-time monitoring and response, reducing reliance on chemical treatments and supporting sustainable farming practices by targeting infections at an early stage.
 
-### Project Objectives
-This internship project addressed two key challenges:
-1. Evaluating and implementing automated methods to filter synthetic training data, focusing on removing unrealistic artificially generated images
-2. Improving the quality of training datasets for defect detection models through systematic comparison of filtering approaches
-
-### Methods
-The cornerstone of effective supervised machine learning models lies in the quality of training data. While Apple employs artificial image generation techniques for new products, this process often yields unrealistic images that compromise model performance. To reduce the burden on human labellers, we investigated four automated approaches:
-
-<div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin: 20px 0;">
-    <div style="text-align: center;">
-        <img src="/assets/img/classification-model-histogram.png" width="200" height="150" alt="Classification Model Results" style="width: 100%; height: auto;">
-        <em>Figure 1: Classification Model</em>
-    </div>
-    <div style="text-align: center;">
-        <img src="/assets/img/voxel.png" width="200" height="150" alt="Voxel Embeddings" style="width: 100%; height: auto;">
-        <em>Figure 2: Voxel Embeddings</em>
-    </div>
-    <div style="text-align: center;">
-        <img src="/assets/img/mm1-histogram.png" width="200" height="150" alt="Multimodal Model Results" style="width: 100%; height: auto;">
-        <em>Figure 3: Multimodal Model</em>
-    </div>
-    <div style="text-align: center;">
-        <img src="/assets/img/image-reward-histogram.png" width="200" height="150" alt="ImageReward Results" style="width: 100%; height: auto;">
-        <em>Figure 4: ImageReward</em>
-    </div>
+<div style="text-align: center;">
+    <img src="/assets/img/rex.jpg" width="100" height="50" alt="REX system in operation" style="width: 60%; height: auto;">
+    <em>Figure 1: The REX system in operation, featuring a stereo camera for depth mapping and an end-effector for DNA sampling.</em>
 </div>
 
-1. The classification model, initially trained to distinguish between escape and overkill cases, failed to transfer effectively to our use case.
-2. Embeddings from pre-trained models available in Voxel [3] showed significant overlap between realistic and unrealistic images.
-3. Our internal foundational multimodal model yielded similar scores across images, failing to provide clear differentiation.
-4. The ImageReward model [2] demonstrated the best performance in filtering unrealistic images.
+### Methods
+As a graduate research student, I contributed to the design and testing of REX's AI-based grasping algorithms and its integration with the robotic system. The REX system uses a custom-built gantry robot with six degrees of freedom, equipped with a stereo camera that captures high-resolution depth images. Depth mapping and leaf segmentation are achieved using RAFT Stereo and YOLO-V8, providing accurate spatial data for disease detection and grasp point identification.
 
-### Results and Discussion
-The ImageReward model [2] emerged as the most effective solution, demonstrating superior performance in filtering unrealistic images. By implementing a threshold score of -2, we successfully eliminated approximately 25% of unrealistic images from a dataset of 2000 images. This achievement is particularly significant as it required no manufacturing-specific training.
+<div style="text-align: center;">
+    <img src="/assets/img/depth_map.png" width="400" height="300" alt="Depth Map" style="width: 100%; height: auto;">
+    <em>Figure 2: Depth maps used for identifying optimal leaf grasp points.</em>
+</div>
 
-### Personal Contribution
-As an intern, I led the evaluation of multiple automated filtering approaches and implemented the successful ImageReward-based solution. This work directly contributed to streamlining the data preprocessing pipeline and enhancing the efficiency of defect detection processes for new products.
+The robot’s end-effector, fitted with a microneedle array, allows for precise DNA sampling without damaging the surrounding foliage. REX also incorporates a microfluidic device to streamline DNA extraction and pathogen identification, using a portable nanopore sequencer and machine learning to analyze plant health in real time.
 
-### References
-[1] D. Weimer, B. Scholz-Reiter, and M. Shpitalni, "Design of deep convolutional neural network architectures for automated feature extraction in industrial inspection," CIRP Annals, vol. 65, no. 1, pp. 417–420, 2016, doi: https://doi.org/10.1016/j.cirp.2016.04.072
+<div style="text-align: center;">
+    <img src="/assets/img/segmentation_map.png" width="400" height="300" alt="Segmentation Map" style="width: 100%; height: auto;">
+    <em>Figure 3: Segmentation maps used for identifying optimal leaf grasp points.</em>
+</div>
 
-[2] J. Xu et al., "ImageReward: Learning and Evaluating Human Preferences for Text-to-Image Generation," arXiv.org, Jun. 06, 2023. https://arxiv.org/abs/2304.05977
+### Results
+Through this integrated approach, REX successfully identified optimal grasp points on tomato leaves by analyzing depth data, leaf segmentation, and spatial positioning. Preliminary tests on tomato plant datasets demonstrated a high success rate in sample collection and pathogen detection. The system’s leaf-grasping pipeline occasionally encounters challenges when reaching tilted or awkwardly positioned leaves, highlighting the need for further refinement in grasp point accuracy.
 
-[3] "FiftyOne — FiftyOne 0.19.1 documentation," docs.voxel51.com. https://docs.voxel51.com/
+<div style="text-align: center;">
+    <img src="/assets/img/microfluidic_pipeline.png" width="400" height="300" alt="Microfluidic Pipeline" style="width: 100%; height: auto;">
+    <em>Figure 4: The microfluidic DNA extraction pipeline enables rapid pathogen identification through nanopore sequencing.</em>
+</div>
+
+### Discussion
+REX represents a significant advancement in autonomous plant disease detection, reducing the need for labor-intensive monitoring and enabling rapid responses to pathogen threats. By identifying infections early, this system can minimize crop loss, support eco-friendly farming practices, and contribute to global food security. Future improvements will focus on enhancing the grasping algorithm for greater precision and validating the system’s effectiveness in real-world agricultural environments.

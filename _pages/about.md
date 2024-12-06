@@ -2,11 +2,11 @@
 layout: about
 title: about
 permalink: /
-subtitle: Apple | MS @ CMU 
+subtitle: Master of Science @ CMU | Machine Learning 
 
 profile:
   align: right
-  image: profile.png
+  image: profile_pic.png
   image_circular: false # crops the image to make it circular
   more_info: 
 
