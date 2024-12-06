@@ -3,7 +3,7 @@ layout: page
 permalink: /diffusiondemo/
 title: diffusion demo
 description: 
-nav: true
+nav: false
 nav_order: 5
 ---
 <script
