@@ -2,8 +2,7 @@
 layout: about
 title: about
 permalink: /
-subtitle: Master of Science @ CMU | Machine Learning 
-
+subtitle: Master of Science @ CMU 
 profile:
   align: right
   image: profile_pic.png
@@ -16,17 +15,10 @@ selected_papers: true # includes a list of papers marked as "selected={true}"
 social: true # includes social icons at the bottom of the page
 ---
 
-I am a graduate student at Carnegie Mellon University, specializing in Computer Vision and Deep Learning. With a strong foundation in Python and PyTorch, I develop cutting-edge solutions in computer vision and generative AI, with a focus on diffusion models. I have extensive experience in dataset curation, large-scale distributed training, and production deployment, allowing me to deliver comprehensive machine learning solutions from concept to deployment. I am particularly passionate about pushing the boundaries of AI technology while ensuring practical, real-world applications.
+Engineer by training, innovator at heart, and a passionate advocate for the intersection of machine learning and robotics. I thrive in a world where creativity meets technology, constantly pushing the boundaries of what’s possible with artificial intelligence and computer vision. With a foundation in Mechanical Engineering and a deep dive into Robotics, I specialize in tackling complex challenges and delivering innovative solutions.
 
-Throughout my career, I've contributed to impactful projects at leading organizations:
+Currently, I’m pursuing a Master's in Mechanical Engineering with a focus on Robotics and Intelligent Systems at Carnegie Mellon University. My work explores cutting-edge topics like Machine Learning, Deep Learning, Path Planning, and Perception, with the goal of making robots smarter, more adaptable, and impactful in real-world applications.
 
-- At Apple, I enhanced MacBook defect detection systems
-- At Hexo, I specialized in fine-tuning stable diffusion models
+I have hands-on experience with powerful tools and frameworks like PyTorch, TensorFlow, and OpenCV, which I use to develop advanced computer vision systems and intelligent models. My expertise extends to ROS for robotic system integration and Python for building robust, scalable solutions. Whether it's training neural networks for object detection, designing real-time tracking systems, or integrating sensory feedback for enhanced robot autonomy, I bring a comprehensive software-focused approach to the table.
 
-My work has been recognized through prestigious awards, including:
-- The DAAD-WISE Scholarship
-- The K.C. Mahindra Scholarship for Post Graduate Studies Abroad
-
-Currently, as a Graduate Research Assistant at CMU, I'm working on:
-- Developing interactive visualizations for Stable Diffusion models
-- Developing cloud-native ML pipelines with auto-scaling capabilities for seamless multi-user deployment
+I’m seeking to collaborate with forward-thinking teams and organizations that aim to redefine the limits of technology. If you're driven by innovation and share a vision of transforming ideas into impactful realities, let’s connect—I’d love to explore how we can create the future together!
