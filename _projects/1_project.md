@@ -14,7 +14,7 @@ A real-time vision system for leaf manipulation combining geometric computer vis
 
 <div style="text-align: center;">
     <img src="/assets/img/project-1/REX.drawio_f.png" alt="System Architecture" style="width: 100%; max-width: 3000px;">
-    <p><em>Multi-stage perception pipeline integrating traditional computer vision with deep learning</em></p>
+    <p><em>Multi-stage perception pipeline for leaf manipulation</em></p>
 </div>
 
 ---
@@ -66,7 +66,7 @@ Grasp point selection employs weighted scoring criteria:
     <img src="/assets/img/project-1/cv_op2.png" alt="CV Output 2" style="max-width: 400px;">
 </div>
 <div style="text-align: center;">
-    <p><em>Traditional CV pipeline output: Segmented leaf visualization with grasp point selection (left), and raw stereo camera image with detected leaf midrib (right)</em></p>
+    <p><em>Traditional CV pipeline output: Raw stereo camera image with detected leaf midrib (left); Segmented leaf visualization with grasp point selection (right)</em></p>
 </div>
 
 ##### 2.3.2 ML-Enhanced Decision Making
@@ -80,7 +80,7 @@ The machine learning component features a custom CNN architecture (GraspPointCNN
 
 <div style="text-align: center;">
     <img src="/assets/img/project-1/CNN_grasp.drawio.png" alt="CNN Architecture" style="width: 50%; max-width: 400px;">
-    <p><em>GraspPointCNN architecture: A 9-channel input feature map processed through three encoder blocks with an attention mechanism, followed by dense layers and global average pooling</em></p>
+    <p><em>GraspPointCNN architecture</em></p>
 </div>
 
 ##### 2.3.3 Hybrid Decision Integration
@@ -100,8 +100,10 @@ The system implements a dynamic integration strategy:
 
 <div style="text-align: center;">
     <img src="/assets/img/project-1/hybrid_op.png" alt="Hybrid Output" style="width: 100%; max-width: 800px;">
-    <p><em>Hybrid CV-ML grasp point selection optimized for reliable leaf manipulation</em></p>
+    <p><em>Hybrid CV-ML grasp point selection: Left - Original camera view with leaf midrib ; Right - Segmented leaves with grasp point visualization
+</em></p>
 </div>
+Note: Grasping at the leaf tip often fails as the REX robot struggles to secure it, leading to missed grasps or leaf displacement. The hybrid grasp point selection method outperforms traditional CV, achieving a 4.66% improvement over 150 test cases.
 
 <div style="text-align: center;">
     <img src="/assets/img/project-1/rex_grasp_4x.gif" alt="System Operation" style="width: 30%; max-width: 240px;">
@@ -144,14 +146,14 @@ I was responsible for the complete system development including:
 - Created the hybrid decision integration framework that balances traditional CV with ML refinement
 - Testing and validating system performance through multiple experimental trials
 
-This work was completed under the guidance of Prof. Abhishek Silval and Prof. George Cantor.
+This work was completed under the guidance of Prof. Abhisesh Silwal and Prof. George A. Kantor.
 
 ---
 
 ### 5. Technologies Used
 
 - **Languages**: Python, C++
-- **Frameworks**: PyTorch, CUDA, OpenCV, Scikit-learn, Numpy, Pandas, Matplotlib
+- **Frameworks**: PyTorch, CUDA, OpenCV, Scikit-learn, Numpy, Pandas, Matplotlib, ROS2
 - **Computer Vision**: Instance Segmentation, Depth Estimation, Point Cloud Processing, SDF, 3D Perception
 - **Deep Learning**: CNN Architecture Design, Self-Supervised Learning, Model Training & Optimization, Attention Mechanisms
 - **Cloud Computing**: AWS EC2
