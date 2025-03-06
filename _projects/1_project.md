@@ -225,7 +225,7 @@ This research is carried out under the guidance of Prof. Abhisesh Silwal and Pro
 
 ### 6. Project Repositories
 
-- [LeafGrasp-Vision-ML](https://github.com/Srecharan/Leaf-Grasping-Vision-ML.git): Main Repository
+- [LeafGrasp-Vision-ML](https://github.com/Srecharan/Leaf-Grasping-Vision-ML.git): Main Project Repository
 - [YOLOv8 Segmentation Node](https://github.com/Srecharan/YoloV8Seg-REX.git)
 - [RAFT-Stereo Node](https://github.com/Srecharan/RAFTStereo-REX.git)
 - [REX-Robot](https://github.com/Srecharan/REX-Robot.git)
