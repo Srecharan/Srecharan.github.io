@@ -15,10 +15,15 @@ selected_papers: true # includes a list of papers marked as "selected={true}"
 social: true # includes social icons at the bottom of the page
 ---
 
-Engineer by training, innovator at heart, and passionate about the intersection of machine learning and robotics.
+<!-- Manually setting profile image size
+<img src="profile_pic.png" alt="Profile Picture" width="250"> -->
 
-Currently pursuing a Master's in Mechanical Engineering with a focus on Robotics and Intelligent Systems at Carnegie Mellon University, I specialize in developing intelligent solutions that bridge creativity and technology. My work revolves around Machine Learning, Deep Learning, Path Planning, and Perception, striving to make robots smarter and impactful in real-world applications.
+Hello, I'm a graduate student pursuing my MS at Carnegie Mellon University with a specialization in machine learning, deep learning and computer vision.
 
-With expertise in tools like PyTorch, TensorFlow, OpenCV, and ROS, I build advanced computer vision systems and scalable models. From training neural networks for object detection to designing real-time tracking systems and enhancing robot autonomy, I tackle complex challenges with a software-focused approach.
+As a Graduate Research Assistant at CMU, I've engineered a real-time vision system for autonomous plant manipulation that integrates stereo depth estimation with custom convolutional neural networks through a hybrid approach that combines classical computer vision with deep learning.
 
-I’m eager to collaborate with visionary teams that share a passion for innovation and technology-driven transformation. Let’s connect and create the future together!
+My professional journey has taken me through diverse challenges - from designing real-time 3D hand tracking systems for AR interactions at Hanon Systems to implementing multi-camera vision systems for industrial automation at Vee Ess Engineering. Each role has strengthened my expertise in building robust ML systems that perform reliably in complex environments.
+
+I'm fascinated by the capabilities of generative models and Generative AI, having benchmarked GANs, VAEs, and diffusion models for image synthesis, and built end-to-end systems leveraging NLP and time-series analysis for quantitative stock trading.
+
+What drives me is creating ML systems that bridge theoretical performance with practical application. I excel at data acquisition and preprocessing, and I'm proficient with PyTorch, TensorFlow, OpenCV, and scikit-learn, leveraging these frameworks to develop scalable solutions that deliver real value across industries. My work combines technical rigor with a focus on impact, consistently pushing the boundaries of what's possible in applied machine learning.
