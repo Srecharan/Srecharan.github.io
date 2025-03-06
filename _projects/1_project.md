@@ -103,7 +103,7 @@ The system implements a dynamic integration strategy:
     <p><em>Hybrid CV-ML grasp point selection: Left - Original camera view with leaf midrib ; Right - Segmented leaves with grasp point visualization
 </em></p>
 </div>
-Note: Grasping at the leaf tip often fails as the REX robot struggles to secure it, leading to missed grasps or leaf displacement. The hybrid grasp point selection method outperforms traditional CV, achieving a 4.66% improvement over 150 test cases.
+<p style="font-style: italic; font-weight: underline;">Note: Grasping at the leaf tip often fails as the REX robot struggles to secure it, leading to missed grasps or leaf displacement. The hybrid grasp point selection method outperforms traditional CV, achieving a 4.66% improvement over 150 test cases.</p>
 
 <div style="text-align: center;">
     <img src="/assets/img/project-1/rex_grasp_4x.gif" alt="System Operation" style="width: 30%; max-width: 240px;">
@@ -116,22 +116,85 @@ Note: Grasping at the leaf tip often fails as the REX robot struggles to secure 
 
 #### Model Metrics
 
-| Metric                | Value  | Description |
-|----------------------|--------|-------------|
-| Validation Accuracy  | 93.14% | Overall model accuracy |
-| Positive Accuracy    | 97.09% | Accuracy for successful grasp points |
-| Precision           | 92.59% | True positives / predicted positives |
-| Recall              | 97.09% | True positives / actual positives |
-| F1 Score            | 94.79% | Balanced measure of precision and recall |
+<div class="table-responsive">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Metric</th>
+        <th>Value</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Validation Accuracy</td>
+        <td>93.14%</td>
+        <td>Overall model accuracy</td>
+      </tr>
+      <tr>
+        <td>Positive Accuracy</td>
+        <td>97.09%</td>
+        <td>Accuracy for successful grasp points</td>
+      </tr>
+      <tr>
+        <td>Precision</td>
+        <td>92.59%</td>
+        <td>True positives / predicted positives</td>
+      </tr>
+      <tr>
+        <td>Recall</td>
+        <td>97.09%</td>
+        <td>True positives / actual positives</td>
+      </tr>
+      <tr>
+        <td>F1 Score</td>
+        <td>94.79%</td>
+        <td>Balanced measure of precision and recall</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 
 #### System Performance (150 test cases)
 
-| Metric                     | Classical CV | Hybrid (CV+ML) | Improvement |
-|---------------------------|--------------|----------------|-------------|
-| Accuracy (px)             | 25.3         | 27.1          | +1.8        |
-| Feature Alignment (%)     | 80.67        | 83.33         | +2.66       |
-| Edge Case Handling (%)    | 75.33        | 77.33         | +2.00       |
-| Overall Success Rate (%)  | 78.00        | 82.66         | +4.66       |
+<div class="table-responsive">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Metric</th>
+        <th>Classical CV</th>
+        <th>Hybrid (CV+ML)</th>
+        <th>Improvement</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Accuracy (px)</td>
+        <td>25.3</td>
+        <td>27.1</td>
+        <td>+1.8</td>
+      </tr>
+      <tr>
+        <td>Feature Alignment (%)</td>
+        <td>80.67</td>
+        <td>83.33</td>
+        <td>+2.66</td>
+      </tr>
+      <tr>
+        <td>Edge Case Handling (%)</td>
+        <td>75.33</td>
+        <td>77.33</td>
+        <td>+2.00</td>
+      </tr>
+      <tr>
+        <td>Overall Success Rate (%)</td>
+        <td>78.00</td>
+        <td>82.66</td>
+        <td>+4.66</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 
 ---
 
@@ -146,11 +209,11 @@ I was responsible for the complete system development including:
 - Created the hybrid decision integration framework that balances traditional CV with ML refinement
 - Testing and validating system performance through multiple experimental trials
 
-This work was completed under the guidance of Prof. Abhisesh Silwal and Prof. George A. Kantor.
+This research is carried out under the guidance of Prof. Abhisesh Silwal and Prof. George A. Kantor.
 
 ---
 
-### 5. Technologies Used
+### 5. Skills and Technologies Used
 
 - **Languages**: Python, C++
 - **Frameworks**: PyTorch, CUDA, OpenCV, Scikit-learn, Numpy, Pandas, Matplotlib, ROS2
@@ -160,8 +223,15 @@ This work was completed under the guidance of Prof. Abhisesh Silwal and Prof. Ge
 
 ---
 
-### 6. Resources
+### 6. Project Repositories
 
-- [GitHub Repository](https://github.com/Srecharan/LeafGrasp-Vision-ML)
+- [LeafGrasp-Vision-ML](https://github.com/Srecharan/LeafGrasp-Vision-ML)
 - [YOLOv8 Segmentation Node](https://github.com/Srecharan/YoloV8Seg-REX.git)
 - [RAFT-Stereo Node](https://github.com/Srecharan/RAFTStereo-REX.git)
+- [REX-Robot](https://github.com/Srecharan/REX-Robot.git)
+
+---
+
+### 7. References
+
+[1] Silwal, A., Zhang, X. M., Hadlock, T., Neice, J., Haque, S., Kaundanya, A., Lu, C., Vinatzer, B. A., Kantor, G., & Li, S. (2024). Towards an AI-Driven Cyber-Physical System for Closed-Loop Control of Plant Diseases. *Proceedings of the AAAI Symposium Series*, *4*(1), 432-435. https://doi.org/10.1609/aaaiss.v4i1.31828
