@@ -103,7 +103,10 @@ The system implements a dynamic integration strategy:
     <p><em>Hybrid CV-ML grasp point selection: Left - Original camera view with leaf midrib ; Right - Segmented leaves with grasp point visualization
 </em></p>
 </div>
-<p style="font-style: italic; font-weight: underline;">Note: Grasping at the leaf tip often fails as the REX robot struggles to secure it, leading to missed grasps or leaf displacement. The hybrid grasp point selection method outperforms traditional CV, achieving a 4.66% improvement over 150 test cases.</p>
+<p style="font-style: italic; font-weight: underline;">
+   <span style="font-weight: bold; font-style: italic;">Note:</span> Grasping at the leaf tip often fails as the REX robot struggles to secure it, leading to missed grasps or leaf displacement. The hybrid grasp point selection method outperforms traditional CV, achieving a 4.66% improvement over 150 test cases.
+</p>
+
 
 <div style="text-align: center;">
     <img src="/assets/img/project-1/rex_grasp_4x.gif" alt="System Operation" style="width: 30%; max-width: 240px;">
