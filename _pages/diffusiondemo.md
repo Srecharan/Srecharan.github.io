@@ -1,7 +1,7 @@
 ---
 layout: page
 permalink: /diffusiondemo/
-title: diffusion demo
+title: Portfolio
 description: 
 nav: false
 nav_order: 5
