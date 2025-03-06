@@ -2,7 +2,7 @@
 layout: page
 title: Hybrid CV-ML Approach for Autonomous Leaf Grasping
 description: A novel vision system combining geometric computer vision with deep learning for leaf detection and grasp point optimization
-img: assets/img/hybrid_op.png
+img: assets/img/project-1/hybrid_op.png
 importance: 1
 category: work
 related_publications: false
@@ -13,7 +13,7 @@ related_publications: false
 A real-time vision system for leaf manipulation combining geometric computer vision techniques with deep learning. This hybrid system integrates YOLOv8 for leaf segmentation, RAFT-Stereo for depth estimation, and a custom CNN (GraspPointCNN) for grasp point optimization. The architecture features self-supervised learning that eliminates manual annotation, and a confidence-weighted decision framework that dynamically balances traditional CV algorithms with CNN predictions to achieve superior grasping performance.
 
 <div style="text-align: center;">
-    <img src="/assets/img/REX.drawio_f.png" alt="System Architecture" style="width: 100%; max-width: 800px;">
+    <img src="/assets/img/project-1/REX.drawio_f.png" alt="System Architecture" style="width: 100%; max-width: 3000px;">
     <p><em>Multi-stage perception pipeline integrating traditional computer vision with deep learning</em></p>
 </div>
 
@@ -23,16 +23,25 @@ The system employs a three-stage perception pipeline:
 
 1. **Instance Segmentation (YOLOv8)**: Fine-tuned on a custom dataset of ~900 images, achieving 68% mAP@[0.5:0.95] for leaf mask generation
 
-2. **Depth Estimation (RAFT-Stereo)**: High-precision depth maps with sub-pixel accuracy (<0.5px) from stereo pairs, enabling detailed 3D reconstruction
-
-3. **Hybrid Grasp Point Selection**: Combines geometric CV with machine learning refinement
-
 <div style="text-align: center;">
-    <img src="/assets/img/pcd.gif" alt="3D Point Cloud" style="width: 100%; max-width: 800px;">
-    <p><em>Complete stereo vision pipeline: RGB stereo input, disparity map generation, and resulting 3D point cloud reconstruction</em></p>
+    <img src="/assets/img/project-1/yolo_output.png" alt="YOLOv8 Segmentation Output" style="width: 100%; max-width: 800px;">
+    <p><em>YOLOv8 instance segmentation results showing precise leaf mask generation with high confidence scores</em></p>
 </div>
 
-### Traditional Computer Vision Pipeline
+2. **Depth Estimation (RAFT-Stereo)**: High-precision depth maps with sub-pixel accuracy (<0.5px) from stereo pairs, enabling detailed 3D reconstruction
+
+<div style="text-align: center; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;">
+    <img src="/assets/img/project-1/rgb_input.png" alt="RGB Input" style="width: 30%; max-width: 300px;">
+    <img src="/assets/img/project-1/depth0.png" alt="Depth Map" style="width: 30%; max-width: 300px;">
+    <img src="/assets/img/project-1/plant_pcd-2x.gif" alt="Point Cloud" style="width: 30%; max-width: 300px;">
+</div>
+<div style="text-align: center;">
+    <p><em>Stereo vision pipeline: RGB input (left), depth map visualization (center), and 3D point cloud reconstruction (right)</em></p>
+</div>
+
+3. **Hybrid Grasp Point Selection**: Combines geometric CV with machine learning refinement, which includes the traditional CV pipeline and ML enhancement described below.
+
+#### Traditional Computer Vision Pipeline
 
 The geometric CV component uses Pareto optimization for leaf selection based on:
 
@@ -47,12 +56,15 @@ Grasp point selection employs weighted scoring criteria:
 - **Accessibility (15%)**: Position relative to camera
 - **Edge Awareness (20%)**: Distance from leaf boundaries
 
+<div style="text-align: center; display: flex; justify-content: center; flex-wrap: wrap;">
+    <img src="/assets/img/project-1/cv_op1.png" alt="CV Output 1" style="max-width: 400px;">
+    <img src="/assets/img/project-1/cv_op2.png" alt="CV Output 2" style="max-width: 400px;">
+</div>
 <div style="text-align: center;">
-    <img src="/assets/img/cv_output.png" alt="Traditional CV Output" style="width: 100%; max-width: 800px;">
     <p><em>Traditional CV pipeline output: Segmented leaf visualization with grasp point selection (left), and raw stereo camera image with detected leaf midrib (right)</em></p>
 </div>
 
-### ML-Enhanced Decision Making
+#### ML-Enhanced Decision Making
 
 The machine learning component features a custom CNN architecture (GraspPointCNN) with:
 
@@ -62,7 +74,7 @@ The machine learning component features a custom CNN architecture (GraspPointCNN
 - **Attention Mechanism**: Enables focus on most relevant patch regions
 
 <div style="text-align: center;">
-    <img src="/assets/img/CNN_grasp.drawio.png" alt="CNN Architecture" style="width: 100%; max-width: 800px;">
+    <img src="/assets/img/project-1/CNN_grasp.drawio.png" alt="CNN Architecture" style="width: 50%; max-width: 400px;">
     <p><em>GraspPointCNN architecture: A 9-channel input feature map processed through three encoder blocks with an attention mechanism, followed by dense layers and global average pooling</em></p>
 </div>
 
@@ -82,8 +94,13 @@ The system implements a dynamic integration strategy:
 - Falls back to traditional CV (70-90%) for low-confidence predictions
 
 <div style="text-align: center;">
-    <img src="/assets/img/rex_grasp.gif" alt="System Operation" style="width: 100%; max-width: 800px;">
-    <p><em>Complete pipeline in action: perception, planning, and execution</em></p>
+    <img src="/assets/img/project-1/hybrid_op.png" alt="Hybrid Output" style="width: 100%; max-width: 800px;">
+    <p><em>Hybrid CV-ML grasp point selection optimized for reliable leaf manipulation</em></p>
+</div>
+
+<div style="text-align: center;">
+    <img src="/assets/img/project-1/rex_grasp_4x.gif" alt="System Operation" style="width: 100%; max-width: 800px;">
+    <p><em>Complete pipeline in action: Once 3D coordinates are determined, the system executes precise leaf grasping</em></p>
 </div>
 
 ### Results & Performance
@@ -107,18 +124,18 @@ The system implements a dynamic integration strategy:
 | Edge Case Handling (%)    | 75.33        | 77.33         | +2.00       |
 | Overall Success Rate (%)  | 78.00        | 82.66         | +4.66       |
 
-<div style="text-align: center;">
-    <img src="/assets/img/training_metrics.png" alt="Training Metrics" style="width: 100%; max-width: 800px;">
-    <p><em>Training curves showing loss convergence and accuracy metrics over training epochs</em></p>
-</div>
+### Contribution
 
-### Key Innovations
+I was responsible for the complete development of this computer vision system, including:
 
-- **Hybrid CV-ML Architecture**: Combines the reliability of geometric reasoning with the adaptability of deep learning
-- **Self-Supervised Learning**: CV pipeline acts as an expert teacher, eliminating manual data annotation
-- **Dynamic Integration Strategy**: Confidence-based weighting balances traditional CV with ML predictions
-- **Real-Time Performance**: Full pipeline operates with ~150ms latency on consumer GPU hardware
-- **Attention Mechanism**: CNN design with focused feature extraction for improved prediction accuracy
+- Preparing and annotating the custom dataset for YOLOv8 instance segmentation
+- Fine-tuning the RAFT-Stereo model for high-precision depth estimation
+- Engineering the traditional computer vision pipeline with multiple scoring mechanisms 
+- Designing and implementing the custom CNN architecture (GraspPointCNN)
+- Creating the hybrid decision integration framework that balances traditional CV with ML refinement
+- Testing and validating system performance through multiple experimental trials
+
+This work was completed under the guidance of Prof. Abhishek Silval and Prof. George Cantor.
 
 ### Technologies Used
 
