@@ -2,7 +2,7 @@
 layout: page
 title: Hybrid CV-ML Approach for Autonomous Leaf Grasping
 description: A novel vision system combining geometric computer vision with deep learning for leaf detection and grasp point optimization
-img: assets/img/project-1/hybrid_op.png
+img: assets/img/project-1/hero.png
 importance: 1
 category: work
 related_publications: false
@@ -225,7 +225,7 @@ This research is carried out under the guidance of Prof. Abhisesh Silwal and Pro
 
 ### 6. Project Repositories
 
-- [LeafGrasp-Vision-ML](https://github.com/Srecharan/LeafGrasp-Vision-ML)
+- [LeafGrasp-Vision-ML](https://github.com/Srecharan/Leaf-Grasping-Vision-ML.git): Main project repository
 - [YOLOv8 Segmentation Node](https://github.com/Srecharan/YoloV8Seg-REX.git)
 - [RAFT-Stereo Node](https://github.com/Srecharan/RAFTStereo-REX.git)
 - [REX-Robot](https://github.com/Srecharan/REX-Robot.git)
