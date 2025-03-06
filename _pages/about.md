@@ -1,6 +1,6 @@
 ---
 layout: about
-title: about
+title: About
 permalink: /
 subtitle: "Master of Science @ CMU | Research: <i>Machine Learning</i>"
 profile:
