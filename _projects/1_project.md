@@ -1,59 +1,135 @@
 ---
 layout: page
-title: REX – Robot For EXtracting Leaf Samples
+title: Hybrid CV-ML Approach for Autonomous Leaf Grasping
+description: A novel vision system combining geometric computer vision with deep learning for leaf detection and grasp point optimization
+img: assets/img/hybrid_op.png
 importance: 1
-img: assets/img/ee.jpg
 category: work
 related_publications: false
 ---
 
-### Introduction
-Plant diseases contribute to a 20-40% reduction in global crop yields, making early detection crucial for agricultural sustainability and food security. The REX robot is a cyber-physical system designed to autonomously detect plant diseases and collect leaf samples for DNA analysis. Integrating advanced robotics, AI-driven imaging, and a microfluidic DNA extraction pipeline, REX enables real-time monitoring and response, reducing reliance on chemical treatments and supporting sustainable farming practices by targeting infections at an early stage.
+### Overview
 
-<div style="display: flex; justify-content: space-between; margin: 20px 0;">
-    <div style="width: 48%; text-align: center;">
-        <img src="/assets/img/rex.jpg" alt="REX system in operation" style="width: 100%; height: auto;">
-    </div>
-    <div style="width: 48%; text-align: center;">
-        <img src="/assets/img/P1_2.JPG" alt="REX system's end effector"  style="width: 100%; height: auto;">
-    </div>
-</div>
-<div style="text-align: center;">
-    <em>Figure 1: The REX system in operation, featuring a stereo camera for depth mapping and an end-effector for DNA sampling.</em>
-</div>
-
-### Methods
-As a graduate research student, I contributed to the design and testing of REX's AI-based grasping algorithms and its integration with the robotic system. The REX system uses a custom-built gantry robot with six degrees of freedom, equipped with a stereo camera that captures high-resolution depth images. Depth mapping and leaf segmentation are achieved using RAFT Stereo and YOLO-V8, providing accurate spatial data for disease detection and grasp point identification.
+A real-time vision system for leaf manipulation combining geometric computer vision techniques with deep learning. This hybrid system integrates YOLOv8 for leaf segmentation, RAFT-Stereo for depth estimation, and a custom CNN (GraspPointCNN) for grasp point optimization. The architecture features self-supervised learning that eliminates manual annotation, and a confidence-weighted decision framework that dynamically balances traditional CV algorithms with CNN predictions to achieve superior grasping performance.
 
 <div style="text-align: center;">
-    <img src="/assets/img/raft.png" width="400" height="300" alt="Depth Map" style="width: 100%; height: auto;">
-    <em>Figure 2: Depth maps used for identifying optimal leaf grasp points.</em>
+    <img src="/assets/img/REX.drawio_f.png" alt="System Architecture" style="width: 100%; max-width: 800px;">
+    <p><em>Multi-stage perception pipeline integrating traditional computer vision with deep learning</em></p>
 </div>
 
-The robot's end-effector, fitted with a microneedle array, allows for precise DNA sampling without damaging the surrounding foliage. REX also incorporates a microfluidic device to streamline DNA extraction and pathogen identification, using a portable nanopore sequencer and machine learning to analyze plant health in real time.
+### Multi-Stage Perception Pipeline
+
+The system employs a three-stage perception pipeline:
+
+1. **Instance Segmentation (YOLOv8)**: Fine-tuned on a custom dataset of ~900 images, achieving 68% mAP@[0.5:0.95] for leaf mask generation
+
+2. **Depth Estimation (RAFT-Stereo)**: High-precision depth maps with sub-pixel accuracy (<0.5px) from stereo pairs, enabling detailed 3D reconstruction
+
+3. **Hybrid Grasp Point Selection**: Combines geometric CV with machine learning refinement
 
 <div style="text-align: center;">
-    <img src="/assets/img/yolo.png" width="400" height="300" alt="Segmentation Map" style="width: 100%; height: auto;">
-    <em>Figure 3: Segmentation maps used for identifying optimal leaf grasp points.</em>
+    <img src="/assets/img/pcd.gif" alt="3D Point Cloud" style="width: 100%; max-width: 800px;">
+    <p><em>Complete stereo vision pipeline: RGB stereo input, disparity map generation, and resulting 3D point cloud reconstruction</em></p>
 </div>
 
-### Results
-Through this integrated approach, REX successfully identified optimal grasp points on tomato leaves by analyzing depth data, leaf segmentation, and spatial positioning. Preliminary tests on tomato plant datasets demonstrated a high success rate in sample collection and pathogen detection. The system's leaf-grasping pipeline occasionally encounters challenges when reaching tilted or awkwardly positioned leaves, highlighting the need for further refinement in grasp point accuracy.
+### Traditional Computer Vision Pipeline
 
-<div style="display: flex; justify-content: space-between; align-items: center; margin: 20px 0;">
-    <div style="width: 48%; text-align: center;">
-        <img src="/assets/img/grasp.PNG" alt="Microfluidic Pipeline" style="width: 100%; height: 300px; object-fit: cover;">
-    </div>
-    <div style="width: 48%; text-align: center;">
-        <img src="/assets/img/P1_3.png" alt="Microfluidic Pipeline" style="width: 100%; height: 300px; object-fit: cover;">
-    </div>
-</div>
+The geometric CV component uses Pareto optimization for leaf selection based on:
+
+- **Clutter Score (35%)**: Isolation from other leaves using Signed Distance Fields
+- **Distance Score (35%)**: Proximity to camera with exponential falloff
+- **Visibility Score (30%)**: Completeness of view and position in frame
+
+Grasp point selection employs weighted scoring criteria:
+
+- **Flatness Analysis (25%)**: Surface smoothness using depth gradients
+- **Approach Vector Quality (40%)**: Optimal approach direction
+- **Accessibility (15%)**: Position relative to camera
+- **Edge Awareness (20%)**: Distance from leaf boundaries
+
 <div style="text-align: center;">
-    <em>Figure 4: The microfluidic DNA extraction pipeline enables rapid pathogen identification through nanopore sequencing.</em>
+    <img src="/assets/img/cv_output.png" alt="Traditional CV Output" style="width: 100%; max-width: 800px;">
+    <p><em>Traditional CV pipeline output: Segmented leaf visualization with grasp point selection (left), and raw stereo camera image with detected leaf midrib (right)</em></p>
 </div>
 
+### ML-Enhanced Decision Making
 
-### Discussion
-REX represents a significant advancement in autonomous plant disease detection, reducing the need for labor-intensive monitoring and enabling rapid responses to pathogen threats. By identifying infections early, this system can minimize crop loss, support eco-friendly farming practices, and contribute to global food security. Future improvements will focus on enhancing the grasping algorithm for greater precision and validating the system's effectiveness in real-world agricultural environments.
+The machine learning component features a custom CNN architecture (GraspPointCNN) with:
 
+- **Self-Supervised Learning**: CV pipeline acts as an expert teacher
+- **Data Collection**: Automated generation of positive/negative samples
+- **9-Channel Input Features**: Depth map, binary mask, and 7 score maps
+- **Attention Mechanism**: Enables focus on most relevant patch regions
 
+<div style="text-align: center;">
+    <img src="/assets/img/CNN_grasp.drawio.png" alt="CNN Architecture" style="width: 100%; max-width: 800px;">
+    <p><em>GraspPointCNN architecture: A 9-channel input feature map processed through three encoder blocks with an attention mechanism, followed by dense layers and global average pooling</em></p>
+</div>
+
+### Hybrid Decision Integration
+
+The system implements a dynamic integration strategy:
+
+- Traditional CV generates candidate grasp points
+- ML model evaluates candidates with confidence scores
+- Weighted average combines both approaches:
+  ```python
+  ml_conf = 1.0 - abs(ml_score - 0.5) * 2
+  ml_weight = min(0.3, ml_conf * 0.6)
+  final_score = (1 - ml_weight) * trad_score + ml_weight * ml_score
+  ```
+- ML influence varies (10-30%) based on prediction confidence
+- Falls back to traditional CV (70-90%) for low-confidence predictions
+
+<div style="text-align: center;">
+    <img src="/assets/img/rex_grasp.gif" alt="System Operation" style="width: 100%; max-width: 800px;">
+    <p><em>Complete pipeline in action: perception, planning, and execution</em></p>
+</div>
+
+### Results & Performance
+
+#### Model Metrics
+
+| Metric                | Value  | Description |
+|----------------------|--------|-------------|
+| Validation Accuracy  | 93.14% | Overall model accuracy |
+| Positive Accuracy    | 97.09% | Accuracy for successful grasp points |
+| Precision           | 92.59% | True positives / predicted positives |
+| Recall              | 97.09% | True positives / actual positives |
+| F1 Score            | 94.79% | Balanced measure of precision and recall |
+
+#### System Performance (150 test cases)
+
+| Metric                     | Classical CV | Hybrid (CV+ML) | Improvement |
+|---------------------------|--------------|----------------|-------------|
+| Accuracy (px)             | 25.3         | 27.1          | +1.8        |
+| Feature Alignment (%)     | 80.67        | 83.33         | +2.66       |
+| Edge Case Handling (%)    | 75.33        | 77.33         | +2.00       |
+| Overall Success Rate (%)  | 78.00        | 82.66         | +4.66       |
+
+<div style="text-align: center;">
+    <img src="/assets/img/training_metrics.png" alt="Training Metrics" style="width: 100%; max-width: 800px;">
+    <p><em>Training curves showing loss convergence and accuracy metrics over training epochs</em></p>
+</div>
+
+### Key Innovations
+
+- **Hybrid CV-ML Architecture**: Combines the reliability of geometric reasoning with the adaptability of deep learning
+- **Self-Supervised Learning**: CV pipeline acts as an expert teacher, eliminating manual data annotation
+- **Dynamic Integration Strategy**: Confidence-based weighting balances traditional CV with ML predictions
+- **Real-Time Performance**: Full pipeline operates with ~150ms latency on consumer GPU hardware
+- **Attention Mechanism**: CNN design with focused feature extraction for improved prediction accuracy
+
+### Technologies Used
+
+- **Languages**: Python, C++
+- **Frameworks**: PyTorch, CUDA, OpenCV, Scikit-learn, Numpy, Pandas, Matplotlib
+- **Computer Vision**: Instance Segmentation, Depth Estimation, Point Cloud Processing, SDF, 3D Perception
+- **Deep Learning**: CNN Architecture Design, Self-Supervised Learning, Model Training & Optimization, Attention Mechanisms
+- **Cloud Computing**: AWS EC2
+
+### Resources
+
+- [GitHub Repository](https://github.com/Srecharan/LeafGrasp-Vision-ML)
+- [YOLOv8 Segmentation Node](https://github.com/Srecharan/YoloV8Seg-REX.git)
+- [RAFT-Stereo Node](https://github.com/Srecharan/RAFTStereo-REX.git)
