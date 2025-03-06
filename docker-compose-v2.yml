@@ -1,0 +1,11 @@
+version: '2'
+services:
+  jekyll:
+    image: amirpourmand/al-folio:v0.12.1
+    ports:
+      - 8080:8080
+      - 35729:35729
+    volumes:
+      - .:/srv/jekyll
+    environment:
+      - JEKYLL_ENV=development

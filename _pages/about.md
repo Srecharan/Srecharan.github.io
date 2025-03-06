@@ -2,7 +2,7 @@
 layout: about
 title: about
 permalink: /
-subtitle: Master of Science @ CMU 
+subtitle: "Master of Science @ CMU | Research: <i>Machine Learning</i>"
 profile:
   align: right
   image: profile_pic.png
