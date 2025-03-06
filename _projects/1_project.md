@@ -8,7 +8,7 @@ category: work
 related_publications: false
 ---
 
-### Overview
+### 1. Overview
 
 A real-time vision system for leaf manipulation combining geometric computer vision techniques with deep learning. This hybrid system integrates YOLOv8 for leaf segmentation, RAFT-Stereo for depth estimation, and a custom CNN (GraspPointCNN) for grasp point optimization. The architecture features self-supervised learning that eliminates manual annotation, and a confidence-weighted decision framework that dynamically balances traditional CV algorithms with CNN predictions to achieve superior grasping performance.
 
@@ -17,18 +17,22 @@ A real-time vision system for leaf manipulation combining geometric computer vis
     <p><em>Multi-stage perception pipeline integrating traditional computer vision with deep learning</em></p>
 </div>
 
-### Multi-Stage Perception Pipeline
+---
+
+### 2. Multi-Stage Perception Pipeline
 
 The system employs a three-stage perception pipeline:
 
-1. **Instance Segmentation (YOLOv8)**: Fine-tuned on a custom dataset of ~900 images, achieving 68% mAP@[0.5:0.95] for leaf mask generation
+#### 2.1 Instance Segmentation (YOLOv8)
+Fine-tuned on a custom dataset of ~900 images, achieving 68% mAP@[0.5:0.95] for leaf mask generation
 
 <div style="text-align: center;">
     <img src="/assets/img/project-1/yolo_output.png" alt="YOLOv8 Segmentation Output" style="width: 100%; max-width: 800px;">
     <p><em>YOLOv8 instance segmentation results showing precise leaf mask generation with high confidence scores</em></p>
 </div>
 
-2. **Depth Estimation (RAFT-Stereo)**: High-precision depth maps with sub-pixel accuracy (<0.5px) from stereo pairs, enabling detailed 3D reconstruction
+#### 2.2 Depth Estimation (RAFT-Stereo)
+High-precision depth maps with sub-pixel accuracy (<0.5px) from stereo pairs, enabling detailed 3D reconstruction
 
 <div style="text-align: center; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;">
     <img src="/assets/img/project-1/rgb_input.png" alt="RGB Input" style="width: 30%; max-width: 300px;">
@@ -39,9 +43,10 @@ The system employs a three-stage perception pipeline:
     <p><em>Stereo vision pipeline: RGB input (left), depth map visualization (center), and 3D point cloud reconstruction (right)</em></p>
 </div>
 
-3. **Hybrid Grasp Point Selection**: Combines geometric CV with machine learning refinement, which includes the traditional CV pipeline and ML enhancement described below.
+#### 2.3 Hybrid Grasp Point Selection
+Combines geometric CV with machine learning refinement, which includes the traditional CV pipeline and ML enhancement described below.
 
-#### Traditional Computer Vision Pipeline
+##### 2.3.1 Traditional Computer Vision Pipeline
 
 The geometric CV component uses Pareto optimization for leaf selection based on:
 
@@ -64,7 +69,7 @@ Grasp point selection employs weighted scoring criteria:
     <p><em>Traditional CV pipeline output: Segmented leaf visualization with grasp point selection (left), and raw stereo camera image with detected leaf midrib (right)</em></p>
 </div>
 
-#### ML-Enhanced Decision Making
+##### 2.3.2 ML-Enhanced Decision Making
 
 The machine learning component features a custom CNN architecture (GraspPointCNN) with:
 
@@ -78,7 +83,7 @@ The machine learning component features a custom CNN architecture (GraspPointCNN
     <p><em>GraspPointCNN architecture: A 9-channel input feature map processed through three encoder blocks with an attention mechanism, followed by dense layers and global average pooling</em></p>
 </div>
 
-### Hybrid Decision Integration
+##### 2.3.3 Hybrid Decision Integration
 
 The system implements a dynamic integration strategy:
 
@@ -99,11 +104,13 @@ The system implements a dynamic integration strategy:
 </div>
 
 <div style="text-align: center;">
-    <img src="/assets/img/project-1/rex_grasp_4x.gif" alt="System Operation" style="width: 100%; max-width: 800px;">
+    <img src="/assets/img/project-1/rex_grasp_4x.gif" alt="System Operation" style="width: 30%; max-width: 240px;">
     <p><em>Complete pipeline in action: Once 3D coordinates are determined, the system executes precise leaf grasping</em></p>
 </div>
 
-### Results & Performance
+---
+
+### 3. Results & Performance
 
 #### Model Metrics
 
@@ -124,20 +131,24 @@ The system implements a dynamic integration strategy:
 | Edge Case Handling (%)    | 75.33        | 77.33         | +2.00       |
 | Overall Success Rate (%)  | 78.00        | 82.66         | +4.66       |
 
-### Contribution
+---
 
-I was responsible for the complete development of this computer vision system, including:
+### 4. Contribution
 
-- Preparing and annotating the custom dataset for YOLOv8 instance segmentation
-- Fine-tuning the RAFT-Stereo model for high-precision depth estimation
-- Engineering the traditional computer vision pipeline with multiple scoring mechanisms 
-- Designing and implementing the custom CNN architecture (GraspPointCNN)
-- Creating the hybrid decision integration framework that balances traditional CV with ML refinement
+I was responsible for the complete system development including:
+
+- Preparation and annotation of custom dataset for YOLOv8 instance segmentation, along with training and validating the model
+- Fine-tuning the RAFT-Stereo model for high-precision depth estimation and 3D reconstruction
+- Engineered the traditional computer vision pipeline with multiple scoring mechanisms, optimal leaf selection, and grasping point detection
+- Designed and implemented the custom CNN architecture (GraspPointCNN)
+- Created the hybrid decision integration framework that balances traditional CV with ML refinement
 - Testing and validating system performance through multiple experimental trials
 
 This work was completed under the guidance of Prof. Abhishek Silval and Prof. George Cantor.
 
-### Technologies Used
+---
+
+### 5. Technologies Used
 
 - **Languages**: Python, C++
 - **Frameworks**: PyTorch, CUDA, OpenCV, Scikit-learn, Numpy, Pandas, Matplotlib
@@ -145,7 +156,9 @@ This work was completed under the guidance of Prof. Abhishek Silval and Prof. Ge
 - **Deep Learning**: CNN Architecture Design, Self-Supervised Learning, Model Training & Optimization, Attention Mechanisms
 - **Cloud Computing**: AWS EC2
 
-### Resources
+---
+
+### 6. Resources
 
 - [GitHub Repository](https://github.com/Srecharan/LeafGrasp-Vision-ML)
 - [YOLOv8 Segmentation Node](https://github.com/Srecharan/YoloV8Seg-REX.git)
