@@ -15,9 +15,9 @@ nav_order: 6
            class="card-img-top img-fluid">
       <div class="card-body text-center">
         <a href="{{ '/assets/pdf/Srecharan_Technical_Portfolio.pdf' | relative_url }}" 
-           class="btn btn-primary" 
+           class="btn btn-primary btn-lg" 
            target="_blank">
-          DOWNLOAD PORTFOLIO
+          <i class="fa-solid fa-file-pdf me-2"></i> VIEW PORTFOLIO
         </a>
       </div>
     </div>

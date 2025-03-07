@@ -5,7 +5,7 @@ permalink: /
 subtitle: "Master of Science @ CMU | Research: <i>Machine Learning</i>"
 profile:
   align: right
-  image: profile_pic.png
+  image: dp.png
   image_circular: false # crops the image to make it circular
   more_info: 
 
