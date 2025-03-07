@@ -1,14 +1,14 @@
-- title: General Information
+- title: XXX TEST CHANGE XXX
   type: map
   contents:
     - name: Full Name
-      value: Albert Einstein
+      value: Srecharan 
     - name: Date of Birth
       value: 14th March 1879
     - name: Languages
       value: English, German
 
-- title: Education
+- title: EDUCATION
   type: time_table
   contents:
     - title: PhD
