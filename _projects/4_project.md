@@ -170,7 +170,6 @@ The system achieved exceptional performance across various metrics:
         <th style="padding: 12px; border: 1px solid #ddd;">Precision</th>
         <th style="padding: 12px; border: 1px solid #ddd;">Recall</th>
         <th style="padding: 12px; border: 1px solid #ddd;">F1 Score</th>
-        <th style="padding: 12px; border: 1px solid #ddd;">IOU</th>
       </tr>
     </thead>
     <tbody>
@@ -181,7 +180,6 @@ The system achieved exceptional performance across various metrics:
         <td style="padding: 12px; border: 1px solid #ddd;">0.999</td>
         <td style="padding: 12px; border: 1px solid #ddd;">0.999</td>
         <td style="padding: 12px; border: 1px solid #ddd;">0.999</td>
-        <td style="padding: 12px; border: 1px solid #ddd;">~0.92</td>
       </tr>
       <tr style="background-color: #f9f9f9;">
         <td style="padding: 12px; border: 1px solid #ddd;"><strong>Worker Detection</strong></td>
@@ -190,7 +188,6 @@ The system achieved exceptional performance across various metrics:
         <td style="padding: 12px; border: 1px solid #ddd;">0.938</td>
         <td style="padding: 12px; border: 1px solid #ddd;">0.960</td>
         <td style="padding: 12px; border: 1px solid #ddd;">0.950</td>
-        <td style="padding: 12px; border: 1px solid #ddd;">~0.86</td>
       </tr>
     </tbody>
   </table>

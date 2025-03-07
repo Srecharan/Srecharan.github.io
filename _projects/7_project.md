@@ -137,4 +137,4 @@ As the project progresses, several promising avenues for future work have been i
 
 ### 7. Project Repository
 
-[ToolVisionLM on GitHub](https://github.com/Srecharan/ToolVisionLM)
+[ToolVisionLM](https://github.com/akameswa/VLM-Tool-Recognition.git)
