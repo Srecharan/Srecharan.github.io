@@ -14,7 +14,7 @@ A sophisticated real-time hand gesture recognition system developed during my in
 
 <div style="text-align: center;">
     <img src="/assets/img/project-3/virtuhand_sys.png" alt="System Architecture" style="width: 3000%; max-width: 800px;">
-    <p><em>Complete system architecture showing data flow from camera through Python backend to Unity frontend</em></p>
+    <p><em> System pipeline showing data flow from camera through Python backend to Unity frontend</em></p>
 </div>
 
 <div style="text-align: center;">
