@@ -1,10 +1,18 @@
 github_users:
   - Srecharan
 
+repo_trophies:
+  enabled: true
+  theme_light: flat
+  theme_dark: onedark
+
+repo_theme_light: default
+repo_theme_dark: dark
+
 repo_description_lines_max: 2
 
 github_repos:
-  - Srecharan/Artificial-Intelligence-and-Machine-Learning-for-Engineering-Design 
-  - Srecharan/Robot-Dynamics-and-Analysis-
-  - Srecharan/Optimization-Based-Control-and-Estimation-in-Compliant-Robotic-Systems- 
-  - Srecharan/Modern-Control-Theory-and-Applications- 
+  - Srecharan/ToolVisionLM
+  - Srecharan/DiffusionNeRF-3D
+  - Srecharan/GenVision
+  - Srecharan/CVAnnotate
