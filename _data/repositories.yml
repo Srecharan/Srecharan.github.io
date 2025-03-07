@@ -9,10 +9,15 @@ repo_trophies:
 repo_theme_light: default
 repo_theme_dark: dark
 
-repo_description_lines_max: 2
+repo_description_lines_max: 5
 
 github_repos:
-  - Srecharan/ToolVisionLM
-  - Srecharan/DiffusionNeRF-3D
+  - Srecharan/DeepTrade
+  - Srecharan/VirtuHand
+  - Srecharan/Leaf-Grasping-Vision-ML
   - Srecharan/GenVision
+  - Srecharan/YoloV8Seg-REX
   - Srecharan/CVAnnotate
+  - Srecharan/DiffusionNeRF-3D
+  - Srecharan/RAFTStereo-REX
+  - Srecharan/REX-Robot
