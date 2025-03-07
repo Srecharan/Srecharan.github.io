@@ -1,3 +1,3 @@
 # Personal Website
 
-[Link to the website](https://akameswa.github.io)
+Link to my [personal website](https://srecharan.github.io/). 
