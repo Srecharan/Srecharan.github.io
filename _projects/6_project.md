@@ -1,8 +1,8 @@
 ---
 layout: page
-title: DiffusionNeRF-3D
+title: "High-Fidelity 3D Scene Reconstruction Integrating Diffusion Models with Memory-Efficient Neural Radiance Fields"
 description: A novel approach combining diffusion models with Neural Radiance Fields for high-quality 3D scene reconstruction
-img: assets/img/project-6/sample_0_detailed.png
+img: assets/img/project-6/herooo.png
 importance: 6
 category: work
 related_publications: false
@@ -10,13 +10,11 @@ related_publications: false
 
 ### 1. Overview
 
-DiffusionNeRF-3D introduces a novel approach to 3D scene reconstruction by combining diffusion models with Neural Radiance Fields (NeRF). The project implements a two-stage pipeline that first uses a diffusion model to refine depth maps from RGBD images, which are then used by a memory-efficient NeRF model for high-quality 3D scene reconstruction. This integration addresses key limitations in traditional NeRF approaches, particularly for scenes with complex geometry or limited view coverage.
+DiffusionNeRF-3D introduces a novel approach to 3D scene reconstruction by combining diffusion models with Neural Radiance Fields (NeRF). The project implements a two-stage pipeline that first uses a diffusion model to refine depth maps from RGBD images, which are then used by a memory-efficient NeRF model for high-quality 3D scene reconstruction. This integration addresses key limitations in traditional NeRF approaches, particularly for scenes with complex geometry or limited view coverage. The system was developed and evaluated using the NYU Depth V2 dataset, which provides RGB-D images of diverse indoor scenes.
 
 <div style="text-align: center;">
-    <div style="display: flex; justify-content: center; gap: 20px; margin-bottom: 20px;">
-        <img src="/assets/img/project-6/sample_0_detailed.png" alt="Depth Refinement Sample" style="width: 90%; max-width: 800px;">
-    </div>
-    <p><em>Depth map refinement process showing: (top-left) original depth, (top-right) noisy input, (bottom-left) denoised output, and (bottom-right) error map</em></p>
+    <img src="/assets/img/project-6/overview.png" alt="RGB and Depth Map" style="width: 90%; max-width: 800px;">
+    <p><em>Example from NYU Depth V2 dataset showing RGB image (left) and corresponding depth map (right) used for training and evaluation</em></p>
 </div>
 
 ---
@@ -35,7 +33,7 @@ The first stage of the pipeline uses a specialized diffusion model to enhance th
   - Feature enhancement blocks for detail preservation
 
 <div style="text-align: center;">
-    <img src="/assets/img/project-6/depth_refiner_edges.png" alt="Edge-Aware Processing" style="width: 80%; max-width: 700px;">
+    <img src="/assets/img/project-6/depth_refiner_edges.png" alt="Edge-Aware Processing" style="width: 100%; max-width: 700px;">
     <p><em>Edge-aware processing comparing original edges (left) with refined edges (right), demonstrating the preservation of structural details</em></p>
 </div>
 
@@ -80,7 +78,7 @@ The second stage leverages a custom Neural Radiance Field (NeRF) implementation 
 - **Advanced Training**: Integrated depth supervision from the diffusion model with custom loss functions
 
 <div style="text-align: center;">
-    <img src="/assets/img/project-6/depth_analysis.png" alt="Depth Analysis" style="width: 80%; max-width: 700px;">
+    <img src="/assets/img/project-6/depth_analysis.png" alt="Depth Analysis" style="width: 100%; max-width: 1000px;">
     <p><em>Depth value distribution analysis showing the distribution of depth values across the dataset, helping to calibrate model parameters</em></p>
 </div>
 
@@ -120,8 +118,38 @@ def sample_pdf(bins, weights, n_samples, det=False):
     PDF here means "Probability Density Function" which helps focus samples 
     where they're most needed.
     """
-    # Implementation details
-    # ...
+    weights = weights.float()
+    bins = bins.float()
+    weights = weights + 1e-5
+    pdf = weights / torch.sum(weights, dim=-1, keepdim=True)
+    
+    cdf = torch.cumsum(pdf, dim=-1)  # [..., n_bins]
+    cdf = torch.cat([torch.zeros_like(cdf[..., :1]), cdf], dim=-1)  # [..., n_bins+1]
+
+    if det:
+        u = torch.linspace(0., 1., n_samples, device=weights.device)
+        u = u.expand(list(cdf.shape[:-1]) + [n_samples])
+    else:
+        u = torch.rand(list(cdf.shape[:-1]) + [n_samples], device=weights.device)
+
+    u = u.contiguous()
+    cdf = cdf.unsqueeze(-2).expand(*cdf.shape[:-1], n_samples, cdf.shape[-1])
+    inds = torch.searchsorted(cdf[..., -1], u)
+    below = torch.clamp(inds-1, min=0)
+    above = torch.clamp(inds, max=cdf.shape[-1]-1)
+    inds_g = torch.stack([below, above], -1)
+    
+    bins_expanded = bins.unsqueeze(-2).expand(*bins.shape[:-1], n_samples, bins.shape[-1])
+    
+    bins_g = torch.gather(bins_expanded, -1, inds_g)
+    cdf_g = torch.gather(cdf, -1, inds_g)
+
+    denom = cdf_g[..., 1] - cdf_g[..., 0]
+    denom = torch.where(denom < 1e-5, torch.ones_like(denom), denom)
+    t = (u - cdf_g[..., 0]) / denom
+    samples = bins_g[..., 0] + t * (bins_g[..., 1] - bins_g[..., 0])
+    
+    return samples
 ```
 
 ---
@@ -187,4 +215,4 @@ The project has several planned enhancements:
 
 ### 6. Project Repository
 
-[DiffusionNeRF-3D](https://github.com/Srecharan/DiffusionNeRF-3D)
+[DiffusionNeRF-3D](https://github.com/Srecharan/DiffusionNeRF-3D.git)
