@@ -236,6 +236,6 @@ The demonstration scene shown in this portfolio was created after the internship
 
 ---
 
-### 8. Project Repositories
+### 8. Project Repository
 
 - [VirtuHand](https://github.com/Srecharan/VirtuHand.git): Main project repository

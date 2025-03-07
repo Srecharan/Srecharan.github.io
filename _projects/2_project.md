@@ -193,6 +193,6 @@ As this was an individual project, I was responsible for the complete developmen
 
 ---
 
-### 8. Project Repositories
+### 8. Project Repository
 
 - [DeepTrade-AI](https://github.com/Srecharan/DeepTrade.git): Main project repository
