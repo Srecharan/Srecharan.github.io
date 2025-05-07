@@ -308,8 +308,8 @@ display_categories: ["external-services"] # these categories will be displayed o
 # -----------------------------------------------------------------------------
 
 scholar:
-  last_name: [Kameswara Rao]
-  first_name: [Adithya]
+  last_name: [Selvam]
+  first_name: [Srecharan]
 
   style: apa
   locale: en
