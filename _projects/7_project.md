@@ -1,20 +1,25 @@
 ---
 layout: page
-title: "ToolVisionLM: Enhancing Vision-Language Models for Industrial Safety [Ongoing]"
-description: A comprehensive evaluation framework for vision-language models in technical domains with focus on industrial tool recognition and safety guidance
+title: "SafetyVLM: Enhanced Vision-Language Models for Industrial Tool Recognition"
+description: A comprehensive system for tool recognition and safety guidance using fine-tuned vision-language models with RAG and GRPO optimization
 img: assets/img/project-7/VLM.png
-importance: 7
+importance: 4
 category: work
-related_publications: false
+related_publications: False
 ---
 
 ### 1. Overview
 
-ToolVisionLM is an innovative research project that explores the application of Vision-Language Models (VLMs) to specialized technical domains, with a focus on industrial tool recognition, usage instruction, and safety guidance. While VLMs have demonstrated remarkable capabilities in general visual understanding tasks, their application to specialized domains remains limited. This project addresses this gap by developing a comprehensive evaluation framework for assessing VLM performance in industrial settings where proper tool handling directly impacts workplace safety and operational efficiency.
+SafetyVLM is a complete system that enhances Vision-Language Models (VLMs) for specialized technical domains, with a focus on industrial tool recognition, usage instruction, and safety guidance. While VLMs have demonstrated remarkable capabilities in general visual understanding tasks, their application to safety-critical domains often lacks domain-specific knowledge. This project addresses this gap by fine-tuning state-of-the-art VLMs (Qwen2.5-VL-7B and Llama-3.2-11B-Vision) with a custom dataset of 7,458 tool images enriched with safety annotations.
+
+The system enhances VLM performance through three key innovations:
+- **LoRA fine-tuning** across vision-only, language-only, and vision+language strategies
+- **RAG integration** to boost safety information accuracy from 72% to 90-92% 
+- **GRPO optimization** to maintain 80-85% of RAG's accuracy gains while eliminating inference latency
 
 <div style="text-align: center;">
-    <img src="/assets/img/project-7/VLM.png" alt="Vision-Language Model Architecture" style="width: 90%; max-width: 800px;">
-    <p><em>General architecture of vision-language models for tool recognition showing the image encoding, vision-language fusion, and task-specific outputs</em></p>
+    <img src="/assets/img/project-7/sys-design.png" alt="System Architecture" style="width: 90%; max-width: 800px;">
+    <p><em>System architecture showing the complete pipeline with LoRA fine-tuning, RAG enhancement, and GRPO optimization</em></p>
 </div>
 
 ---
@@ -23,90 +28,141 @@ ToolVisionLM is an innovative research project that explores the application of 
 
 #### 2.1 Dataset Preparation
 
-The project features a meticulously curated dataset spanning 13 core tool categories:
+The project features a meticulously curated dataset spanning 17 mechanical tool categories:
 
-- **Primary Tools**: Wrenches, hammers, pliers, screwdrivers (most common industrial tools)
-- **Secondary Tools**: Bolts, dynamometers, testers, tool boxes
-- **Measurement Tools**: Tape measures, calipers
-- **Power/Cutting Tools**: Ratchets, drills, saws
+- **7,458 images** of mechanical tools in various settings
+- **16,567 annotations** across all tool categories
+- **Enriched safety metadata** including PPE requirements, hazards, and common misuses
+- **Structured JSON labels** for training VLMs to generate safety-aware outputs
 
 <div style="text-align: center;">
-    <img src="/assets/img/project-7/data_graph.png" alt="Dataset Distribution" style="width: 90%; max-width: 800px;">
-    <p><em>Distribution of industrial tool categories across the three datasets used in this project, showing the comprehensive coverage across tool types</em></p>
+    <img src="/assets/img/project-7/tool_class_distribution.png" alt="Dataset Distribution" style="width: 90%; max-width: 800px;">
+    <p><em>Distribution of tool categories in the dataset, showing comprehensive coverage across tool types</em></p>
 </div>
 
-Data aggregation was performed across three distinct sources to ensure comprehensive coverage:
-1. A specialized tool dataset with fine-grained classifications (Dataset 1)
-2. A general tool dataset with broad category coverage (Dataset 2)
-3. A high-quality dataset with diverse tool representations (Dataset 3)
+Example annotation format:
+```json
+{
+  "tool": "needle-nose pliers",
+  "primary_function": "Gripping and manipulating small wires in tight spaces",
+  "safety_considerations": {
+    "required_ppe": "Safety glasses, work gloves",
+    "primary_hazards": [
+      "Pinch points between handles",
+      "Sharp wire ends",
+      "Eye injury from flying wire pieces"
+    ],
+    "common_misuses": [
+      "Using as a wrench",
+      "Applying excessive force"
+    ]
+  }
+}
+```
 
-This consolidation produced a balanced dataset with over 20 images per tool category (minimum) and more than 1,000 total images, enabling robust model training and evaluation.
+#### 2.2 Model Selection and Fine-tuning
 
-#### 2.2 Model Selection
+The project evaluated several state-of-the-art Vision-Language Models to benchmark their performance on specialized tool recognition tasks:
 
-The project evaluates several state-of-the-art Vision-Language Models to benchmark their performance on specialized tool recognition tasks:
-
-- **Qwen2-VL-7B-Instruct**: Alibaba's 7B parameter instruction-tuned multimodal model
-- **Phi-3-vision-128k-instruct**: Microsoft's vision-capable model with extended context window
+- **Qwen2.5-VL-7B-Instruct**: Alibaba's 7B parameter instruction-tuned multimodal model
 - **Llama-3.2-11B-Vision-Instruct**: Meta's 11B parameter multimodal model
-- **SmolVLM**: A lightweight VLM optimized for efficient deployment
-- **PaliGemma**: Google's multimodal model built on the Gemma architecture
+
+Given the VRAM constraints typically encountered in research environments, the project heavily relied on efficient training techniques:
+- 4-bit quantization and gradient checkpointing to drastically reduce memory usage
+- Parameter-Efficient Fine-Tuning (PEFT), specifically Low-Rank Adaptation (LoRA)
+
+Three distinct fine-tuning strategies were implemented and compared:
+
+- **Vision-only (-v)**: Fine-tuning applied primarily to the vision encoder layers
+- **Language-only (-l)**: Fine-tuning focused on the language decoder layers
+- **Vision+Language (-vl)**: Comprehensive approach fine-tuning both vision and language components
 
 <div style="text-align: center;">
-    <img src="/assets/img/project-7/flowchart.png" alt="Project Pipeline" style="width: 75%; max-width: 700px;">
-    <p><em>ToolVisionLM pipeline showing dataset preparation, model selection, parallel approach strategies, and evaluation methodology</em></p>
+    <img src="/assets/img/project-7/fine_tuning_comparison.png" alt="Fine-tuning Comparison" style="width: 75%; max-width: 700px;">
+    <p><em>Comparison of fine-tuning strategies showing the impact on different performance metrics</em></p>
 </div>
 
-#### 2.3 Dual Enhancement Approach
+#### 2.3 Enhancement Approaches
 
 The project implements two parallel enhancement strategies to optimize VLM performance for tool-related tasks:
 
-##### Fine-tuning Strategy
-- Dataset-specific model adaptation using controlled fine-tuning procedures
-- Parameter-efficient fine-tuning techniques to preserve general capabilities
-- Domain-specific prompt engineering optimized for tool recognition tasks
-- Balanced training across all tool categories to prevent bias
+##### Retrieval-Augmented Generation (RAG)
+The RAG implementation aimed to inject authoritative safety knowledge directly into the VLM's generation process:
 
-##### RAG (Retrieval-Augmented Generation) Approach
-- Development of a specialized knowledge base containing detailed tool specifications
-- Implementation of efficient embedding and retrieval mechanisms
-- Context-aware information retrieval to enhance model responses
-- Hybrid retrieval approaches combining visual and textual information
+- A knowledge base containing structured safety information extracted during dataset processing
+- Embeddings generated using a Sentence Transformer model and stored in a FAISS index
+- During inference, the VLM first performs tool identification, then uses this as a query to retrieve safety information
+- Retrieved information is formatted into a context string and prepended to the main instruction prompt
+
+##### Reinforcement Learning with GRPO
+Generative Reinforcement from Pairwise Optimization (GRPO) was implemented to align the VLM's output style and priorities with the desired structured, safety-focused format:
+
+- For a given image and prompt, two responses were generated: a "rejected" response from the fine-tuned model without RAG, and a "chosen" response from the fine-tuned model with RAG
+- The RAG-enhanced response served as the preferred example, teaching the model to favor comprehensive safety information
+- The GRPO loss function directly optimizes model parameters to increase the probability of generating preferred responses
+- This approach offers advantages over traditional RLHF methods by not requiring a separate reward model
+
+<div style="text-align: center;">
+    <img src="/assets/img/project-7/model_performance_heatmap.png" alt="Enhancement Comparison" style="width: 90%; max-width: 800px;">
+    <p><em>Performance comparison showing the impact of RAG and GRPO enhancements across different aspects of tool safety information</em></p>
+</div>
 
 ---
 
 ### 3. Evaluation Framework
 
-The evaluation methodology incorporates multiple dimensions to provide a comprehensive assessment of model performance:
+A comprehensive evaluation framework was developed to assess the performance of the various models and enhancement techniques. The evaluation covered two main aspects: object detection accuracy and the quality of the generated safety information.
 
-#### 3.1 Recognition Accuracy
+#### 3.1 Detection Metrics
 - **Precision, Recall, and F1 Scores**: Traditional metrics for identification accuracy
+- **Intersection over Union (IoU)**: Evaluating bounding box accuracy
 - **Cross-Category Confusion Analysis**: Identifying common misclassification patterns
-- **Challenging Scenario Testing**: Performance under occlusion, unusual angles, and poor lighting
 
-#### 3.2 Instruction Quality
-- **Completeness**: Evaluating whether responses include all critical information
-- **Correctness**: Assessing technical accuracy of usage instructions
-- **Clarity**: Measuring how understandable the instructions are for end-users
+<div style="text-align: center;">
+    <img src="/assets/img/project-7/overall_metrics.png" alt="Detection Metrics" style="width: 90%; max-width: 800px;">
+    <p><em>Overall detection performance metrics across different model variants and fine-tuning strategies</em></p>
+</div>
 
-#### 3.3 Safety Guidance
-- **Safety-Critical Information**: Identifying presence of essential safety warnings
-- **Hazard Recognition**: Evaluating model's ability to identify potential dangers
-- **Protective Equipment Recommendations**: Checking for appropriate safety gear suggestions
+#### 3.2 Safety Information Quality
+Recognizing that standard metrics don't capture the semantic quality of generated text, a separate evaluation using the Gemini API was devised:
 
-The framework employs both automated metrics and targeted qualitative analysis to identify strengths, weaknesses, and potential improvement areas for each model.
+- **Tool Identification**: Accuracy of the tool name and classification
+- **Primary Function**: Correctness of the described tool functionality
+- **Safety Considerations**: Completeness of safety warnings and PPE requirements
+- **Common Misuses**: Accuracy of described common misuses and risks
+
+<div style="text-align: center;">
+    <img src="/assets/img/project-7/model_radar_comparison.png" alt="Safety Information Quality" style="width: 80%; max-width: 700px;">
+    <p><em>Radar chart showing performance across different safety information quality dimensions</em></p>
+</div>
 
 ---
 
-### 4. Preliminary Findings
+### 4. Results and Findings
 
-While the project is ongoing, initial explorations have yielded several promising insights:
+The evaluation yielded valuable insights into the effectiveness of different approaches:
 
-- VLMs demonstrate varying capabilities in recognizing tool categories, with performance generally correlating with model size
-- Fine-grained tool identification (distinguishing subtypes like Phillips vs. flat-head screwdrivers) remains challenging for most models
-- All models show significant improvements when augmented with either fine-tuning or RAG approaches
-- Safety guidance quality varies substantially, with larger models providing more comprehensive safety information
-- The RAG approach shows particular promise for enhancing safety instruction accuracy without extensive model adaptation
+| Model Family | Condition | Precision | Recall | F1 Score | IoU | Instruction Accuracy | Overall Score |
+|-------------|-----------|-----------|---------|-----------|------|---------------------|---------------|
+| Llama-3.2-11B | Zero-shot (Z) | 0.0114 | 0.0047 | 0.0066 | 0.2087 | 0.62 | 6.18 |
+| Llama-3.2-11B | Fine-tuned (V+L) | **0.7365** | 0.4281 | 0.5415 | **0.6102** | 0.78 | 7.83 |
+| Llama-3.2-11B | Fine-tuned (L) | 0.6562 | **0.5186** | **0.5794** | 0.5388 | **0.82** | **8.36** |
+| Llama-3.2-11B | Fine-tuned (V) | 0.4022 | 0.1131 | 0.1766 | 0.4358 | 0.69 | 5.93 |
+| Qwen2.5-VL | Zero-shot (Z) | 0.6981 | 0.3967 | 0.5059 | **0.6958** | 0.79 | 8.07 |
+| Qwen2.5-VL | Fine-tuned (V+L) | 0.6613 | **0.4583** | **0.5414** | 0.3643 | **0.83** | **8.28** |
+| Qwen2.5-VL | Fine-tuned (L) | 0.6296 | 0.4450 | 0.5214 | 0.3574 | 0.81 | 7.90 |
+| Qwen2.5-VL | Fine-tuned (V) | **0.6995** | 0.3978 | 0.5072 | 0.6931 | 0.81 | 8.07 |
+
+Key performance insights:
+- **Detection Accuracy**: F1 score improved from 0.006 (Llama zero-shot) to 0.58 (fine-tuned)
+- **Safety Information**: Accuracy increased from 83% to 90-92% with RAG
+- **GRPO Efficiency**: Achieved ~82% of RAG's gains with 30% lower inference latency
+- **Best Configuration**: Qwen2.5-VL with V+L fine-tuning for overall performance
+
+<div style="text-align: center;">
+    <img src="/assets/img/project-7/metrics_heatmap.png" alt="Performance Heatmap" style="width: 90%; max-width: 800px;">
+    <p><em>Detailed performance heatmap across evaluation metrics for different model configurations</em></p>
+</div>
 
 ---
 
@@ -114,27 +170,45 @@ While the project is ongoing, initial explorations have yielded several promisin
 
 This research has significant implications for several industrial applications:
 
-- **Safety Training**: Enhanced VLMs could provide on-demand tool usage guidance in industrial settings
-- **Maintenance Support**: Interactive systems could assist technicians with proper tool selection and usage
-- **Quality Assurance**: Automated systems could verify correct tool usage in manufacturing processes
-- **Accessibility**: Improved visual recognition systems could make technical work more accessible
+- **Safety Training**: Enhanced VLMs provide on-demand tool usage guidance in industrial settings
+- **Maintenance Support**: Interactive systems assist technicians with proper tool selection and usage
+- **Quality Assurance**: Automated systems verify correct tool usage in manufacturing processes
+- **Accessibility**: Improved visual recognition systems make technical work more accessible
 
-By addressing the limitations of current VLMs in specialized domains, this project aims to bridge the gap between general visual understanding and domain-specific technical knowledge, ultimately enhancing workplace safety and efficiency.
+By addressing the limitations of current VLMs in specialized domains, this project bridges the gap between general visual understanding and domain-specific technical knowledge, ultimately enhancing workplace safety and efficiency.
 
----
-
-### 6. Future Directions
-
-As the project progresses, several promising avenues for future work have been identified:
-
-- Expanding the tool dataset to include more specialized industrial categories and rare tools
-- Incorporating multimodal feedback mechanisms to improve instruction clarity and correctness
-- Developing benchmark datasets for other technical domains using similar methodologies
-- Exploring lightweight deployment options for resource-constrained industrial environments
-- Integrating real-time safety monitoring capabilities into the system
+<div style="text-align: center;">
+    <img src="/assets/img/project-7/evaluation_dashboard.png" alt="Application Dashboard" style="width: 90%; max-width: 800px;">
+    <p><em>Example safety information dashboard showing the system's potential for industrial applications</em></p>
+</div>
 
 ---
 
-### 7. Project Repository
+### 6. Technical Challenges Overcome
 
-[ToolVisionLM](https://github.com/akameswa/VLM-Tool-Recognition.git)
+Implementing this system involved navigating several technical hurdles:
+
+- **Memory Management**: Employed 4-bit quantization, gradient checkpointing, and PEFT (LoRA) to fit models within available GPU memory
+- **Structured Output Generation**: Improved adherence to desired JSON format through fine-tuning, explicit prompting, and preference learning
+- **GRPO Implementation**: Generated high-quality paired data using the RAG system as a source of "expert" demonstrations
+- **Evaluation Parsing**: Developed robust parsing logic for extracting structured information from model outputs
+
+---
+
+### 7. Skills and Technologies Used
+
+- **Languages**: Python 3.11+
+- **Frameworks**: PyTorch 2.0+, Transformers 4.35+, Unsloth, TRL, FAISS
+- **Models**: Qwen2.5-VL-7B, Llama-3.2-11B-Vision
+- **Techniques**: LoRA fine-tuning, RAG, GRPO (Generative Reinforcement from Pairwise Optimization)
+- **Evaluation**: Object detection metrics, LLM-based semantic evaluation
+- **Deployment**: 4-bit quantization, efficient inference pipelines
+
+---
+
+### 8. Project Repository and Resources
+
+- [GitHub Repository](https://github.com/Srecharan/VLM-Tool-Recognition.git)
+- [Hugging Face Dataset](https://huggingface.co/datasets/akameswa/tool-safety-dataset)
+- [Qwen2.5-VL-7B Fine-tuned (V+L)](https://huggingface.co/akameswa/Qwen2.5-VL-7B-Instruct-bnb-4bit-finetune-vision-language)
+- [Llama-3.2-11B Fine-tuned (V+L)](https://huggingface.co/akameswa/Llama-3.2-11B-Vision-Instruct-bnb-4bit-finetune-vision-language)
