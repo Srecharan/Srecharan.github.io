@@ -3,7 +3,7 @@ layout: page
 title: Deep Image Synthesis with GANs, VAEs, and Diffusion Models
 description: A comprehensive implementation of three leading generative model architectures for image synthesis
 img: assets/img/project-5/hero.png
-importance: 4
+importance: 7
 category: work
 related_publications: false
 ---
