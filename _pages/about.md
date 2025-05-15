@@ -18,12 +18,14 @@ social: true # includes social icons at the bottom of the page
 <!-- Manually setting profile image size
 <img src="profile_pic.png" alt="Profile Picture" width="250"> -->
 
-Hello, I'm a graduate student pursuing my MS at Carnegie Mellon University with a specialization in machine learning, deep learning and computer vision.
+Hi, I'm Srecharan, a recent MS graduate from Carnegie Mellon University with a specialization in applied machine learning, computer vision, and deep learning.
 
-As a Graduate Research Assistant at CMU, I've engineered a real-time vision system for autonomous plant manipulation that integrates stereo depth estimation with custom convolutional neural networks through a hybrid approach that combines classical computer vision with deep learning.
+My research at CMU focused on building self-supervised learning pipelines for robotic grasping. I developed a perception system that combines YOLOv8 segmentation, stereo depth estimation, and a CNN trained with a self-supervised grasp loss. The goal was to accurately identify and grasp plant leaves to help detect and prevent crop disease in greenhouse environments.
 
-My professional journey has taken me through diverse challenges - from designing real-time 3D hand tracking systems for AR interactions at Hanon Systems to implementing multi-camera vision systems for industrial automation at Vee Ess Engineering. Each role has strengthened my expertise in building robust ML systems that perform reliably in complex environments.
+At Hanon Systems, I designed a real-time 3D hand tracking system that enabled automotive technicians to simulate HVAC installations in augmented reality, making the assembly process more intuitive and efficient. As a computer vision intern at Vee Ess Engineering, I implemented multi-camera industrial vision systems to increase recovery rates of high-value components from heavy manufacturing lines.
 
-I'm fascinated by the capabilities of generative models and Generative AI, having benchmarked GANs, VAEs, and diffusion models for image synthesis, and built end-to-end systems leveraging NLP and time-series analysis for quantitative stock trading.
+I've also fine-tuned large language and vision-language models like Qwen and LLaMA using Low-Rank Adaptation (LoRA), Retrieval-Augmented Generation (RAG), and Reinforcement Learning from Human Feedback (RLHF) techniques (Generative Reinforcement from Pairwise Optimization, Direct Preference Optimization) to generate safety-critical instructions for mechanical tools. In parallel, I built quantitative trading pipelines by combining time-series modeling with sentiment-aware financial indicators to support multi-stock decision making.
 
-What drives me is creating ML systems that bridge theoretical performance with practical application. I excel at data acquisition and preprocessing, and I'm proficient with PyTorch, TensorFlow, OpenCV, and scikit-learn, leveraging these frameworks to develop scalable solutions that deliver real value across industries. My work combines technical rigor with a focus on impact, consistently pushing the boundaries of what's possible in applied machine learning.
+I enjoy working across the entire machine learning pipeline — from custom dataset creation and model fine-tuning to benchmarking, optimization, and reliable deployment. My focus is always on solving real-world problems with scalable, practical systems that make a measurable difference.
+
+I'm proficient with PyTorch, TensorFlow, OpenCV, Transformers, ONNX, and cloud platforms like AWS and GCP, with experience implementing ML solutions in both research environments and production systems.
