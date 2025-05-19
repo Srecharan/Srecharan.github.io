@@ -3,7 +3,7 @@ layout: page
 title: "High-Fidelity 3D Scene Reconstruction Integrating Diffusion Models with Memory-Efficient Neural Radiance Fields"
 description: A novel approach combining diffusion models with Neural Radiance Fields for high-quality 3D scene reconstruction
 img: assets/img/project-6/herooo.png
-importance: 6
+importance: 3
 category: work
 related_publications: false
 ---

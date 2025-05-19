@@ -3,7 +3,7 @@ layout: page
 title: DeepTrade AI - Multi-Model Stock Prediction with NLP & Automated Trading
 description: An end-to-end system integrating LSTM-XGBoost prediction with sentiment analysis for automated trading
 img: assets/img/project-2/stock_hero.jpeg
-importance: 2
+importance: 5
 category: work
 related_publications: false
 ---

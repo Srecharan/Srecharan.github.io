@@ -3,7 +3,7 @@ layout: page
 title: Real-time Hand Gesture Recognition for AR Interaction
 description: A sophisticated system combining computer vision and deep learning for hand tracking and gesture recognition in augmented reality
 img: assets/img/project-3/hero_image.png
-importance: 3
+importance: 4
 category: work
 related_publications: false
 ---

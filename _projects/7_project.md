@@ -3,7 +3,7 @@ layout: page
 title: "SafetyVLM: Enhanced Vision-Language Models for Industrial Tool Recognition"
 description: A comprehensive system for tool recognition and safety guidance using fine-tuned vision-language models with RAG and GRPO optimization
 img: assets/img/project-7/VLM.png
-importance: 4
+importance: 2
 category: work
 related_publications: False
 ---
