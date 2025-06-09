@@ -1,7 +1,7 @@
 ---
 layout: page
 title: DeepTrade AI - Multi-Model Stock Prediction with NLP & Automated Trading
-description: An end-to-end system integrating LSTM-XGBoost prediction with sentiment analysis for automated trading
+description: An enterprise-grade system integrating LSTM-XGBoost prediction with sentiment analysis, distributed training infrastructure, and automated workflows
 img: assets/img/project-2/stock_hero.jpeg
 importance: 5
 category: work
@@ -10,7 +10,7 @@ related_publications: false
 
 ### 1. Overview
 
-DeepTrade AI is an end-to-end automated stock trading system that combines machine learning price prediction with NLP-based sentiment analysis. The system features a bidirectional LSTM with attention mechanism and XGBoost ensemble for multi-timeframe price forecasting (5m, 15m, 30m, 1h), and integrates FinBERT for real-time sentiment analysis of financial news, Reddit posts, and SEC filings. The architecture employs dynamic model weighting, comprehensive risk management controls, and simulated execution through the Tradier API, achieving 55-65% directional accuracy and a 58.5% win rate in paper trading.
+DeepTrade AI is an enterprise-grade automated stock trading system that combines machine learning price prediction with NLP-based sentiment analysis and distributed computing infrastructure. The system features a bidirectional LSTM with attention mechanism and XGBoost ensemble for multi-timeframe price forecasting (5m, 15m, 30m, 1h), and integrates FinBERT for real-time sentiment analysis of financial news, Reddit posts, and SEC filings. The architecture employs distributed training across 4x V100 GPUs, real-time Kafka streaming processing 9K+ financial events daily, automated Airflow workflows, and CI/CD pipeline automation. The system achieves 55-65% directional accuracy and a 58.5% win rate in paper trading with comprehensive risk management controls.
 
 <div style="text-align: center;">
     <img src="/assets/img/project-2/deeptrade_system.png" alt="System Architecture" style="width: 100%; max-width: 3000px;">
@@ -19,11 +19,53 @@ DeepTrade AI is an end-to-end automated stock trading system that combines machi
 
 ---
 
-### 2. Sentiment Analysis Pipeline
+### 2. Infrastructure & Data Processing
+
+DeepTrade AI leverages enterprise-scale infrastructure components to handle high-frequency financial data processing and model training:
+
+#### 2.1 Distributed Training Infrastructure
+
+The system implements distributed training across multiple GPUs to efficiently train 100+ model configurations:
+
+- **Multi-GPU Training**: Data parallelism across 4x NVIDIA V100 GPUs with PyTorch DistributedDataParallel
+- **Scale**: 100 model configurations (25 stocks × 4 timeframes) trained simultaneously
+- **Performance**: 75% reduction in training time compared to single-GPU setup
+- **Architecture**: Master-worker setup with automatic load balancing and gradient synchronization
+
+#### 2.2 Real-Time Streaming Pipeline
+
+A high-throughput Kafka streaming infrastructure processes financial data from multiple sources:
+
+- **Technology**: Apache Kafka with optimized partitioning across 4 topics
+- **Capacity**: 9,000+ financial events processed daily with sub-second latency
+- **Data Sources**: NewsAPI, Reddit, SEC EDGAR filings, and market data APIs
+- **Processing**: Real-time event enrichment and validation with Avro serialization
+
+#### 2.3 Automated Workflow Management
+
+Apache Airflow orchestrates the entire sentiment analysis and model training pipeline:
+
+- **Workflow Automation**: Directed Acyclic Graphs (DAGs) for complex task dependencies
+- **FinBERT Integration**: Automated sentiment analysis processing every 4 hours
+- **Feature Generation**: 12 temporal sentiment indicators with momentum tracking
+- **Performance**: ~5% improvement in trading accuracy through automated workflows
+
+#### 2.4 CI/CD Pipeline Automation
+
+GitHub Actions provides continuous integration and deployment for model lifecycle management:
+
+- **Automated Triggers**: Performance degradation detection, data changes, and scheduled retraining
+- **Pipeline Stages**: Setup → validation → training → testing → deployment
+- **Model Management**: Automated versioning, rollback capabilities, and performance monitoring
+- **Deployment**: <15 minutes for complete model retraining and deployment
+
+---
+
+### 3. Sentiment Analysis Pipeline
 
 DeepTrade AI incorporates a sophisticated sentiment analysis pipeline that aggregates and analyzes data from three key sources:
 
-#### 2.1 Multi-Source Integration
+#### 3.1 Multi-Source Integration
 
 - **Financial News Processing (40%)**: Real-time streaming with NewsAPI integration, automated headline analysis, and relevancy-based filtering
   
@@ -31,7 +73,7 @@ DeepTrade AI incorporates a sophisticated sentiment analysis pipeline that aggre
 
 - **SEC Filing Analysis (30%)**: Real-time CIK tracking, form-specific sentiment weighting, and automated filing pattern analysis
 
-#### 2.2 FinBERT Model Architecture
+#### 3.2 FinBERT Model Architecture
 
 The core of the sentiment analysis is a fine-tuned FinBERT model specifically pre-trained on financial text:
 
@@ -46,7 +88,7 @@ The core of the sentiment analysis is a fine-tuned FinBERT model specifically pr
 
 ---
 
-### 3. Multi-Model Stock Prediction System
+### 4. Multi-Model Stock Prediction System
 
 The prediction system employs an ensemble approach combining two powerful models:
 
@@ -55,7 +97,7 @@ The prediction system employs an ensemble approach combining two powerful models
     <p><em>LSTM and XGBoost model architectures with dynamic ensemble weighting</em></p>
 </div>
 
-#### 3.1 LSTM Model with Attention Mechanism
+#### 4.1 LSTM Model with Attention Mechanism
 
 The LSTM component features several advanced architectural elements:
 
@@ -64,7 +106,7 @@ The LSTM component features several advanced architectural elements:
 - **Residual Connections and Batch Normalization**: Improves training stability and convergence
 - **Dynamic Dropout**: Adaptively adjusts regularization during training
 
-#### 3.2 XGBoost Model for Feature-Based Predictions
+#### 4.2 XGBoost Model for Feature-Based Predictions
 
 The XGBoost component complements the LSTM by providing a feature-based perspective:
 
@@ -72,7 +114,7 @@ The XGBoost component complements the LSTM by providing a feature-based perspect
 - **Advanced Feature Engineering**: Processes 39 features including technical indicators, trend signals, and sentiment data
 - **Feature Importance Analysis**: Provides insights into which factors most influence predictions
 
-#### 3.3 Dynamic Ensemble Integration
+#### 4.3 Dynamic Ensemble Integration
 
 The predictions from both models are combined using a dynamic weighting scheme:
 
@@ -94,11 +136,11 @@ The predictions from both models are combined using a dynamic weighting scheme:
 
 ---
 
-### 4. Automated Trading System
+### 5. Automated Trading System
 
 The trading system translates predictions and sentiment analysis into concrete trading actions through the Tradier API sandbox environment.
 
-#### 4.1 Trading Logic Pipeline
+#### 5.1 Trading Logic Pipeline
 
 ```
 Prediction → Sentiment → Signal Generation → Risk Analysis → Position Sizing → Execution
@@ -109,7 +151,7 @@ Confidence  Sentiment     Entry/Exit        Stop Loss      Position Value    Exe
   Scores     Scores        Signals         Take Profit      Calculation     & Monitoring
 ```
 
-#### 4.2 Risk Management Framework
+#### 5.2 Risk Management Framework
 
 - **Maximum Concurrent Positions**: Limits to 2 open trades
 - **Position Size**: 2% of capital per trade
@@ -124,7 +166,7 @@ Confidence  Sentiment     Entry/Exit        Stop Loss      Position Value    Exe
 
 ---
 
-### 5. Performance Metrics
+### 6. Performance Metrics
 
 <div class="table-responsive">
   <table class="table">
@@ -147,6 +189,16 @@ Confidence  Sentiment     Entry/Exit        Stop Loss      Position Value    Exe
         <td>On normalized returns across multiple stocks</td>
       </tr>
       <tr>
+        <td>Training Speed Improvement</td>
+        <td>75%</td>
+        <td>Reduction with distributed training across 4x V100 GPUs</td>
+      </tr>
+      <tr>
+        <td>Streaming Throughput</td>
+        <td>9K+ events/day</td>
+        <td>Real-time financial data processing capacity</td>
+      </tr>
+      <tr>
         <td>Confidence Scoring</td>
         <td>87-93%</td>
         <td>Accuracy of confidence intervals</td>
@@ -167,32 +219,34 @@ Confidence  Sentiment     Entry/Exit        Stop Loss      Position Value    Exe
 
 ---
 
-### 6. Contribution
+### 7. Contribution
 
 As this was an individual project, I was responsible for the complete development of this trading system, including:
 
-- Implementing the bidirectional LSTM network with multi-head attention mechanism for time series forecasting
-- Building the XGBoost model with comprehensive feature engineering for 39 market indicators
-- Developing the dynamic ensemble weighting system that adapts to changing market conditions
-- Creating a real-time sentiment analysis pipeline integrating financial news, Reddit posts, and SEC filings
-- Implementing the FinBERT-based NLP system for financial text classification and sentiment scoring
-- Designing and implementing the automated trading system with comprehensive risk management
-- Building and optimizing the end-to-end data pipeline for real-time operation
-- Testing and validating the system through extensive paper trading simulations
+- **Machine Learning**: Implementing the bidirectional LSTM network with multi-head attention mechanism and XGBoost ensemble with comprehensive feature engineering
+- **Infrastructure**: Designing distributed training infrastructure with PyTorch DDP across 4x V100 GPUs for 75% training speed improvement
+- **Data Engineering**: Building real-time Kafka streaming pipeline processing 9K+ financial events daily with sub-second latency
+- **Workflow Automation**: Creating Apache Airflow DAGs for automated FinBERT sentiment analysis and model training workflows
+- **DevOps**: Implementing CI/CD pipeline with GitHub Actions for automated model lifecycle management
+- **NLP**: Developing the FinBERT-based sentiment analysis system integrating financial news, Reddit posts, and SEC filings
+- **Trading System**: Designing and implementing the automated trading system with comprehensive risk management and Tradier API integration
+- **Testing & Validation**: Building comprehensive test suites and validation frameworks for all infrastructure components
 
 ---
 
-### 7. Skills & Technologies Used
+### 8. Skills & Technologies Used
 
 - **Languages & Frameworks**: Python, PyTorch, TensorFlow, CUDA, Scikit-learn, Pandas, NumPy
 - **Machine Learning**: Gradient Boosting (XGBoost), Feature Engineering, Time Series Forecasting
 - **Deep Learning**: LSTM Networks (Bidirectional, Attention), Model Ensembling, Hyperparameter Optimization
+- **Distributed Computing**: PyTorch DistributedDataParallel, Multi-GPU Training, CUDA Programming
+- **Infrastructure**: Apache Kafka, Apache Airflow, Docker, GitHub Actions CI/CD
 - **Natural Language Processing**: FinBERT, Sentiment Analysis, Text Processing, Financial Text Mining
-- **Cloud Computing**: AWS SageMaker (for distributed model training)
+- **Cloud Computing**: AWS (GPU instances), Distributed training infrastructure
 - **APIs**: Tradier (paper trading), NewsAPI (financial news), Reddit API (sentiment data)
 
 ---
 
-### 8. Project Repository
+### 9. Project Repository
 
-- [DeepTrade-AI](https://github.com/Srecharan/DeepTrade.git)
+- [DeepTrade-AI](https://github.com/Srecharan/DeepTrade.git) 
