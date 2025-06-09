@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "SafetyVLM: Enhanced Vision-Language Models for Industrial Tool Recognition"
+title: "SafetyVLM: VLM-Based Tool Recognition System for Industrial Safety Applications"
 description: A comprehensive system for tool recognition and safety guidance using fine-tuned vision-language models with LangChain RAG, Pinecone, Docker, and Kubernetes deployment
 img: assets/img/project-7/VLM.png
 importance: 2
