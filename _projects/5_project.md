@@ -3,7 +3,7 @@ layout: page
 title: GenAI for Synthetic Data Augmentation: GANs, VAEs & Diffusion Models
 description: Validating synthetic data augmentation for computer vision with measurable accuracy improvements in bird species classification
 img: assets/img/project-5/hero.png
-importance: 5
+importance: 7
 category: work
 related_publications: false
 ---

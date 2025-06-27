@@ -19,8 +19,14 @@ Key achievements:
 - **Custom CUDA kernels** and **TensorRT acceleration**
 - **AWS GPU training infrastructure** with **Docker containerization**
 
-![System Architecture](/assets/img/project-1/REX.drawiof.png)
-*Multi-stage perception pipeline enhanced with Vision-Language-Action integration*
+<div class="row justify-content-sm-center">
+    <div class="col-sm-10 mt-3 mt-md-0">
+        {% include figure.liquid path="assets/img/project-1/REX.drawiof.png" title="System Architecture" class="img-fluid rounded z-depth-1" %}
+    </div>
+</div>
+<div class="caption">
+    Multi-stage perception pipeline enhanced with Vision-Language-Action integration
+</div>
 
 ---
 
@@ -67,8 +73,20 @@ Fine-tuned on approximately 900 images achieving 68% mAP@[0.5:0.95] with TensorR
 ### Depth Estimation (RAFT-Stereo)
 High-precision depth maps with sub-pixel accuracy (<0.5px) enhanced with custom CUDA kernels for accelerated point cloud generation.
 
-![RGB Input](/assets/img/project-1/rgb_input.png) ![Depth Map](/assets/img/project-1/depth0.png) ![Point Cloud](/assets/img/project-1/plant_pcd-2x.gif)
-*Stereo vision pipeline: RGB input → depth estimation → 3D reconstruction*
+<div class="row">
+    <div class="col-sm mt-3 mt-md-0">
+        {% include figure.liquid loading="eager" path="assets/img/project-1/rgb_input.png" title="RGB Input" class="img-fluid rounded z-depth-1" %}
+    </div>
+    <div class="col-sm mt-3 mt-md-0">
+        {% include figure.liquid loading="eager" path="assets/img/project-1/depth0.png" title="Depth Map" class="img-fluid rounded z-depth-1" %}
+    </div>
+    <div class="col-sm mt-3 mt-md-0">
+        {% include figure.liquid loading="eager" path="assets/img/project-1/plant_pcd-2x.gif" title="Point Cloud" class="img-fluid rounded z-depth-1" %}
+    </div>
+</div>
+<div class="caption">
+    Stereo vision pipeline: RGB input → depth estimation → 3D reconstruction
+</div>
 
 ### Hybrid Grasp Point Selection
 
@@ -91,8 +109,14 @@ Custom GraspPointCNN with comprehensive experiment management:
 - **Architecture**: 9-channel input with spatial/channel attention
 - **Performance**: 93.14% validation accuracy, 94.79% F1 score
 
-![CNN Architecture](/assets/img/project-1/CNN_grasp.drawio.png)
-*GraspPointCNN with attention mechanism for grasp quality prediction*
+<div class="row justify-content-sm-center">
+    <div class="col-sm-8 mt-3 mt-md-0">
+        {% include figure.liquid path="assets/img/project-1/CNN_grasp.drawio.png" title="CNN Architecture" class="img-fluid rounded z-depth-1" %}
+    </div>
+</div>
+<div class="caption">
+    GraspPointCNN with attention mechanism for grasp quality prediction
+</div>
 
 #### VLA-Enhanced Decision Making
 Language-guided grasp reasoning with confidence weighting:
@@ -101,8 +125,17 @@ Language-guided grasp reasoning with confidence weighting:
 - **Fallback Strategy**: Robust degradation to proven CV algorithms
 - **Continuous Learning**: Adaptation through operational feedback
 
-![CV Output 1](/assets/img/project-1/cv_op1.png) ![CV Output 2](/assets/img/project-1/cv_op2.png)
-*Hybrid CV-ML-VLA pipeline: Traditional geometric analysis (left) enhanced with foundation model reasoning (right)*
+<div class="row">
+    <div class="col-sm mt-3 mt-md-0">
+        {% include figure.liquid loading="eager" path="assets/img/project-1/cv_op1.png" title="CV Output 1" class="img-fluid rounded z-depth-1" %}
+    </div>
+    <div class="col-sm mt-3 mt-md-0">
+        {% include figure.liquid loading="eager" path="assets/img/project-1/cv_op2.png" title="CV Output 2" class="img-fluid rounded z-depth-1" %}
+    </div>
+</div>
+<div class="caption">
+    Hybrid CV-ML-VLA pipeline: Traditional geometric analysis (left) enhanced with foundation model reasoning (right)
+</div>
 
 ---
 
@@ -126,31 +159,46 @@ Cloud-based training pipeline for VLA fine-tuning:
 - **Scalability**: MLflow tracking across distributed experiments
 - **Deployment**: Docker containerization for environment consistency
 
-![System Operation](/assets/img/project-1/rex_grasp_4x.gif)
-*Production-optimized VLA-enhanced grasping system in operation*
+<div class="row justify-content-sm-center">
+    <div class="col-sm-6 mt-3 mt-md-0">
+        {% include figure.liquid path="assets/img/project-1/rex_grasp_4x.gif" title="System Operation" class="img-fluid rounded z-depth-1" %}
+    </div>
+</div>
+<div class="caption">
+    Production-optimized VLA-enhanced grasping system in operation
+</div>
 
 ---
 
 ## Results & Performance
 
-### Key Performance Metrics
+### Performance Results
 
-**VLA System Performance:**
-- LLaVA-1.6-Mistral-7B with LoRA fine-tuning: **88.0% validation accuracy**
-- GraspPointCNN with Spatial Attention: **93.14% validation accuracy**
-- Hybrid Integration with confidence weighting: **82.66% field success rate**
+#### VLA System Performance
 
-**System Performance Comparison (150 test cases):**
-- Overall Success Rate: **78.00% → 82.66%** (+4.66% improvement)
-- Feature Alignment: **80.67% → 83.33%** (+2.66% improvement)
-- Edge Case Handling: **75.33% → 77.33%** (+2.00% improvement)
-- Accuracy: **25.3px → 27.1px** (+1.8px improvement)
+| Model | Configuration | Validation Accuracy | Training Infrastructure |
+|-------|---------------|-------------------|------------------------|
+| LLaVA-1.6-Mistral-7B | LoRA fine-tuning | **88.0%** | AWS GPU + MLflow |
+| GraspPointCNN | Spatial Attention | 93.14% | Self-supervised |
+| Hybrid Integration | Confidence-weighted | 82.66% field success | Production deployment |
 
-**Production Optimization Results:**
-- VLA Training on AWS: **3x speedup** with GPU acceleration
-- Point Cloud Generation: **150ms → 30ms** (5x speedup)
-- Inference Throughput: **20 FPS → 27 FPS** (35% improvement)
-- Dataset Creation: **100% elimination** of manual annotation
+#### System Performance Comparison (150 test cases)
+
+| Metric | Classical CV | Hybrid (CV+ML+VLA) | Improvement |
+|--------|-------------|-------------------|-------------|
+| Overall Success Rate (%) | 78.00 | **82.66** | +4.66 |
+| Feature Alignment (%) | 80.67 | 83.33 | +2.66 |
+| Edge Case Handling (%) | 75.33 | 77.33 | +2.00 |
+| Accuracy (px) | 25.3 | 27.1 | +1.8 |
+
+#### Production Optimization Results
+
+| Component | Baseline | Optimized | Improvement |
+|-----------|----------|-----------|-------------|
+| VLA Training (AWS) | CPU-only | GPU acceleration | 3x speedup |
+| Point Cloud Generation | 150ms | 30ms | 5x speedup |
+| Inference Throughput | 20 FPS | 27 FPS | 35% improvement |
+| Dataset Creation | Manual annotation | Self-supervised | 100% elimination |
 
 ---
 
