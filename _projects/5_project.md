@@ -83,8 +83,14 @@ The GAN implementation features custom architectures for both generator and disc
 - **Generator**: Takes a 128-dimensional noise vector and progressively upsamples it through custom ResBlockUp modules, outputting a 3×32×32 image
 - **Discriminator**: Processes the 3×32×32 image through ResBlockDown modules and standard ResBlocks for feature extraction, producing a scalar output representing authenticity
 
-![GAN Architecture](/assets/img/project-5/gan_figure.png)
-*GAN architecture showing generator and discriminator networks with ResBlock components*
+<div class="row justify-content-sm-center">
+    <div class="col-sm-8 mt-3 mt-md-0">
+        {% include figure.liquid path="assets/img/project-5/gan_figure.png" title="GAN Architecture" class="img-fluid rounded z-depth-1" %}
+    </div>
+</div>
+<div class="caption">
+    GAN architecture showing generator and discriminator networks with ResBlock components
+</div>
 
 ### GAN Variants and Results
 
@@ -99,8 +105,17 @@ Three different GAN variants were implemented and evaluated:
 
 The most sophisticated implementation utilized the Wasserstein distance with gradient penalty for enforcing the 1-Lipschitz constraint. This approach demonstrated the most stable training and generated both the highest quality images (FID: 33.07) and the best classification improvements (+3.6%).
 
-![WGAN-GP Samples](/assets/img/project-5/WGAN-GP Samples.png) ![WGAN-GP Interpolations](/assets/img/project-5/WGAN-GP Latent Space Interpolations.png)
-*Left: WGAN-GP samples showing the highest quality among GANs. Right: Highly coherent latent space interpolations*
+<div class="row">
+    <div class="col-sm mt-3 mt-md-0">
+        {% include figure.liquid loading="eager" path="assets/img/project-5/WGAN-GP Samples.png" title="WGAN-GP Samples" class="img-fluid rounded z-depth-1" %}
+    </div>
+    <div class="col-sm mt-3 mt-md-0">
+        {% include figure.liquid loading="eager" path="assets/img/project-5/WGAN-GP Latent Space Interpolations.png" title="WGAN-GP Interpolations" class="img-fluid rounded z-depth-1" %}
+    </div>
+</div>
+<div class="caption">
+    Left: WGAN-GP samples showing the highest quality among GANs. Right: Highly coherent latent space interpolations
+</div>
 
 ---
 
@@ -116,8 +131,14 @@ A standard VAE architecture was implemented with several key components:
 - **Latent Space**: Implemented with the reparameterization trick (z = μ + σ * ε, where ε ~ N(0,1)) to enable backpropagation through the sampling process
 - **Decoder**: A network of transposed convolutions that reconstructs images from latent vectors
 
-![VAE Architecture](/assets/img/project-5/vae_figure.png)
-*VAE architecture showing encoder, latent space with reparameterization, and decoder components*
+<div class="row justify-content-sm-center">
+    <div class="col-sm-8 mt-3 mt-md-0">
+        {% include figure.liquid path="assets/img/project-5/vae_figure.png" title="VAE Architecture" class="img-fluid rounded z-depth-1" %}
+    </div>
+</div>
+<div class="caption">
+    VAE architecture showing encoder, latent space with reparameterization, and decoder components
+</div>
 
 ### β-VAE with Annealing
 
@@ -127,8 +148,17 @@ To optimize the balance between reconstruction accuracy and latent space regular
 - **β-Annealing**: Linear annealing schedule from 0 to 0.8 over 20 epochs
 - **Classification Gain**: +2.4% accuracy improvement
 
-![Recon Loss Beta](/assets/img/project-5/Recon. Loss: β annealed.png) ![Samples Beta](/assets/img/project-5/Samples: β annealed.png)
-*Left: Training loss with β-annealing showing convergence. Right: Generated bird samples for classification augmentation*
+<div class="row">
+    <div class="col-sm mt-3 mt-md-0">
+        {% include figure.liquid loading="eager" path="assets/img/project-5/Recon. Loss: β annealed.png" title="Reconstruction Loss" class="img-fluid rounded z-depth-1" %}
+    </div>
+    <div class="col-sm mt-3 mt-md-0">
+        {% include figure.liquid loading="eager" path="assets/img/project-5/Samples: β annealed.png" title="VAE Samples" class="img-fluid rounded z-depth-1" %}
+    </div>
+</div>
+<div class="caption">
+    Left: Training loss with β-annealing showing convergence. Right: Generated bird samples for classification augmentation
+</div>
 
 ---
 
@@ -143,8 +173,14 @@ The diffusion model implementation focused on the inference process, using a pre
 - **Forward Process**: A fixed process that sequentially adds Gaussian noise to images over T timesteps
 - **Reverse Process**: A learned denoising process that iteratively removes noise, using the U-Net to predict the noise component at each step
 
-![Diffusion Model](/assets/img/project-5/diffusion_figure.png)
-*Diffusion model architecture showing forward noising process and learned reverse denoising process*
+<div class="row justify-content-sm-center">
+    <div class="col-sm-8 mt-3 mt-md-0">
+        {% include figure.liquid path="assets/img/project-5/diffusion_figure.png" title="Diffusion Model" class="img-fluid rounded z-depth-1" %}
+    </div>
+</div>
+<div class="caption">
+    Diffusion model architecture showing forward noising process and learned reverse denoising process
+</div>
 
 ### Sampling Strategies and Classification Results
 
@@ -154,8 +190,17 @@ Two sampling approaches were implemented and evaluated:
 - **DDPM**: FID **34.73**, Slow sampling (1000 steps), **+4.1% classification gain**
 - **DDIM**: FID 38.32, Fast sampling (100 steps), +3.7% classification gain
 
-![DDPM Samples](/assets/img/project-5/DDPM Samples.png) ![DDIM Samples](/assets/img/project-5/DDIM Samples.png)
-*Left: DDPM samples achieving the best classification improvements (+4.1%). Right: DDIM samples with faster generation*
+<div class="row">
+    <div class="col-sm mt-3 mt-md-0">
+        {% include figure.liquid loading="eager" path="assets/img/project-5/DDPM Samples.png" title="DDPM Samples" class="img-fluid rounded z-depth-1" %}
+    </div>
+    <div class="col-sm mt-3 mt-md-0">
+        {% include figure.liquid loading="eager" path="assets/img/project-5/DDIM Samples.png" title="DDIM Samples" class="img-fluid rounded z-depth-1" %}
+    </div>
+</div>
+<div class="caption">
+    Left: DDPM samples achieving the best classification improvements (+4.1%). Right: DDIM samples with faster generation
+</div>
 
 ---
 
@@ -208,3 +253,4 @@ This research project demonstrates end-to-end validation of synthetic data augme
 ## Project Repository
 
 [GenVision: Synthetic Data Augmentation](https://github.com/Srecharan/GenVision.git)
+

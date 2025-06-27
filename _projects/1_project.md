@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Vision-Language-Action Enhanced Robotic Leaf Grasping
+title: Vision-Language-Action Enhanced Robotic Leaf Manipulation
 description: A novel vision system combining geometric computer vision, deep learning, and Vision-Language-Action models for intelligent leaf manipulation
 img: assets/img/project-1/hero.png
 importance: 1
@@ -20,7 +20,7 @@ Key achievements:
 - **AWS GPU training infrastructure** with **Docker containerization**
 
 <div class="row justify-content-sm-center">
-    <div class="col-sm-10 mt-3 mt-md-0">
+    <div class="col-sm-12 mt-3 mt-md-0">
         {% include figure.liquid path="assets/img/project-1/REX.drawiof.png" title="System Architecture" class="img-fluid rounded z-depth-1" %}
     </div>
 </div>
@@ -176,29 +176,26 @@ Cloud-based training pipeline for VLA fine-tuning:
 
 #### VLA System Performance
 
-| Model | Configuration | Validation Accuracy | Training Infrastructure |
-|-------|---------------|-------------------|------------------------|
-| LLaVA-1.6-Mistral-7B | LoRA fine-tuning | **88.0%** | AWS GPU + MLflow |
-| GraspPointCNN | Spatial Attention | 93.14% | Self-supervised |
-| Hybrid Integration | Confidence-weighted | 82.66% field success | Production deployment |
+**Model Performance Metrics:**
+- **LLaVA-1.6-Mistral-7B**: 88.0% validation accuracy with LoRA fine-tuning (AWS GPU + MLflow)
+- **GraspPointCNN**: 93.14% validation accuracy with spatial attention (self-supervised)
+- **Hybrid Integration**: 82.66% field success rate with confidence weighting (production deployment)
 
 #### System Performance Comparison (150 test cases)
 
-| Metric | Classical CV | Hybrid (CV+ML+VLA) | Improvement |
-|--------|-------------|-------------------|-------------|
-| Overall Success Rate (%) | 78.00 | **82.66** | +4.66 |
-| Feature Alignment (%) | 80.67 | 83.33 | +2.66 |
-| Edge Case Handling (%) | 75.33 | 77.33 | +2.00 |
-| Accuracy (px) | 25.3 | 27.1 | +1.8 |
+**Performance Improvements:**
+- **Overall Success Rate**: 78.00% → **82.66%** (+4.66% improvement)
+- **Feature Alignment**: 80.67% → 83.33% (+2.66% improvement)  
+- **Edge Case Handling**: 75.33% → 77.33% (+2.00% improvement)
+- **Accuracy**: 25.3px → 27.1px (+1.8px improvement)
 
 #### Production Optimization Results
 
-| Component | Baseline | Optimized | Improvement |
-|-----------|----------|-----------|-------------|
-| VLA Training (AWS) | CPU-only | GPU acceleration | 3x speedup |
-| Point Cloud Generation | 150ms | 30ms | 5x speedup |
-| Inference Throughput | 20 FPS | 27 FPS | 35% improvement |
-| Dataset Creation | Manual annotation | Self-supervised | 100% elimination |
+**System Optimizations:**
+- **VLA Training (AWS)**: CPU-only → GPU acceleration (3x speedup)
+- **Point Cloud Generation**: 150ms → 30ms (5x speedup)
+- **Inference Throughput**: 20 FPS → 27 FPS (35% improvement)
+- **Dataset Creation**: Manual annotation → Self-supervised (100% elimination)
 
 ---
 
