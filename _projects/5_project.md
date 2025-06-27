@@ -3,7 +3,7 @@ layout: page
 title: GenAI for Synthetic Data Augmentation: GANs, VAEs & Diffusion Models
 description: Validating synthetic data augmentation for computer vision with measurable accuracy improvements in bird species classification
 img: assets/img/project-5/hero.png
-importance: 7
+importance: 5
 category: work
 related_publications: false
 ---
@@ -252,5 +252,4 @@ This research project demonstrates end-to-end validation of synthetic data augme
 
 ## Project Repository
 
-[GenVision: Synthetic Data Augmentation](https://github.com/Srecharan/GenVision.git)
-
+[GenVision: Synthetic Data Augmentation](https://github.com/Srecharan/GenVision.git) 
