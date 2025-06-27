@@ -13,7 +13,7 @@ related_publications: false
 A real-time vision system for leaf manipulation that combines geometric computer vision with deep learning and **Vision-Language-Action (VLA) models**. This hybrid system integrates YOLOv8 for segmentation, RAFT-Stereo for depth estimation, and a custom CNN enhanced with **LLaVA-1.6-Mistral-7B for intelligent grasp reasoning**. The architecture features **self-supervised learning eliminating 100% manual annotation**, **LoRA fine-tuning achieving 88% validation accuracy**, and a confidence-weighted framework dynamically balancing traditional CV, ML, and VLA predictions. Production optimizations include **custom CUDA kernels**, **TensorRT acceleration**, and **Docker containerization** with **AWS GPU training infrastructure**.
 
 <div style="text-align: center;">
-    <img src="../assets/img/project-1/REX.drawiof.png" alt="System Architecture" style="width: 100%; max-width: 3000px;">
+    <img src="/assets/img/project-1/REX.drawiof.png" alt="System Architecture" style="width: 100%; max-width: 3000px;">
     <p><em>Multi-stage perception pipeline enhanced with Vision-Language-Action integration</em></p>
 </div>
 
