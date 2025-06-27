@@ -3,7 +3,7 @@ layout: page
 title: Multi-Camera Vision System for Automated Material Detection and Sorting
 description: A real-time computer vision system for material recovery and worker safety monitoring on industrial conveyor belts
 img: assets/img/project-4/heroo.png
-importance: 5
+importance: 6
 category: work
 related_publications: false
 ---
