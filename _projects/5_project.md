@@ -29,46 +29,46 @@ The implementation explores three fundamentally different approaches to deep gen
 
 The core contribution of this work is demonstrating that synthetic data improves real classification performance:
 
-<div style="text-align: center;">
-  <table class="table" style="width: 85%; margin: 0 auto; border-collapse: collapse; border: 1px solid #ddd;">
+<div class="table-responsive">
+  <table class="table">
     <thead>
-      <tr style="background-color: #f2f2f2;">
-        <th style="padding: 12px; border: 1px solid #ddd;">Model</th>
-        <th style="padding: 12px; border: 1px solid #ddd;">Baseline Accuracy</th>
-        <th style="padding: 12px; border: 1px solid #ddd;">Augmented Accuracy</th>
-        <th style="padding: 12px; border: 1px solid #ddd;">Improvement</th>
+      <tr>
+        <th>Model</th>
+        <th>Baseline Accuracy</th>
+        <th>Augmented Accuracy</th>
+        <th>Improvement</th>
       </tr>
     </thead>
     <tbody>
       <tr>
-        <td style="padding: 12px; border: 1px solid #ddd;">ResNet-50 (baseline)</td>
-        <td style="padding: 12px; border: 1px solid #ddd;">70.9%</td>
-        <td style="padding: 12px; border: 1px solid #ddd;">-</td>
-        <td style="padding: 12px; border: 1px solid #ddd;">-</td>
-      </tr>
-      <tr style="background-color: #f9f9f9;">
-        <td style="padding: 12px; border: 1px solid #ddd;">+ WGAN-GP samples</td>
-        <td style="padding: 12px; border: 1px solid #ddd;">70.9%</td>
-        <td style="padding: 12px; border: 1px solid #ddd;">74.5%</td>
-        <td style="padding: 12px; border: 1px solid #ddd;">+3.6%</td>
+        <td>ResNet-50 (baseline)</td>
+        <td>70.9%</td>
+        <td>-</td>
+        <td>-</td>
       </tr>
       <tr>
-        <td style="padding: 12px; border: 1px solid #ddd;">+ VAE samples</td>
-        <td style="padding: 12px; border: 1px solid #ddd;">70.9%</td>
-        <td style="padding: 12px; border: 1px solid #ddd;">73.3%</td>
-        <td style="padding: 12px; border: 1px solid #ddd;">+2.4%</td>
-      </tr>
-      <tr style="background-color: #f9f9f9;">
-        <td style="padding: 12px; border: 1px solid #ddd;"><strong>+ Diffusion samples</strong></td>
-        <td style="padding: 12px; border: 1px solid #ddd;">70.9%</td>
-        <td style="padding: 12px; border: 1px solid #ddd;"><strong>75.0%</strong></td>
-        <td style="padding: 12px; border: 1px solid #ddd;"><strong>+4.1%</strong></td>
+        <td>+ WGAN-GP samples</td>
+        <td>70.9%</td>
+        <td>74.5%</td>
+        <td>+3.6%</td>
       </tr>
       <tr>
-        <td style="padding: 12px; border: 1px solid #ddd;">+ All models combined</td>
-        <td style="padding: 12px; border: 1px solid #ddd;">70.9%</td>
-        <td style="padding: 12px; border: 1px solid #ddd;">75.7%</td>
-        <td style="padding: 12px; border: 1px solid #ddd;">+4.8%</td>
+        <td>+ VAE samples</td>
+        <td>70.9%</td>
+        <td>73.3%</td>
+        <td>+2.4%</td>
+      </tr>
+      <tr>
+        <td><strong>+ Diffusion samples</strong></td>
+        <td>70.9%</td>
+        <td><strong>75.0%</strong></td>
+        <td><strong>+4.1%</strong></td>
+      </tr>
+      <tr>
+        <td>+ All models combined</td>
+        <td>70.9%</td>
+        <td>75.7%</td>
+        <td>+4.8%</td>
       </tr>
     </tbody>
   </table>
@@ -78,40 +78,40 @@ The core contribution of this work is demonstrating that synthetic data improves
 
 One of the most significant findings is the amplified benefit of synthetic data in low-data regimes:
 
-<div style="text-align: center;">
-  <table class="table" style="width: 80%; margin: 0 auto; border-collapse: collapse; border: 1px solid #ddd;">
+<div class="table-responsive">
+  <table class="table">
     <thead>
-      <tr style="background-color: #f2f2f2;">
-        <th style="padding: 12px; border: 1px solid #ddd;">Data Fraction</th>
-        <th style="padding: 12px; border: 1px solid #ddd;">Baseline</th>
-        <th style="padding: 12px; border: 1px solid #ddd;">Augmented</th>
-        <th style="padding: 12px; border: 1px solid #ddd;">Improvement</th>
+      <tr>
+        <th>Data Fraction</th>
+        <th>Baseline</th>
+        <th>Augmented</th>
+        <th>Improvement</th>
       </tr>
     </thead>
     <tbody>
-      <tr style="background-color: #fff3cd;">
-        <td style="padding: 12px; border: 1px solid #ddd;"><strong>10% data</strong></td>
-        <td style="padding: 12px; border: 1px solid #ddd;">45.2%</td>
-        <td style="padding: 12px; border: 1px solid #ddd;"><strong>58.1%</strong></td>
-        <td style="padding: 12px; border: 1px solid #ddd;"><strong>+12.9%</strong></td>
-      </tr>
-      <tr style="background-color: #f9f9f9;">
-        <td style="padding: 12px; border: 1px solid #ddd;">25% data</td>
-        <td style="padding: 12px; border: 1px solid #ddd;">55.8%</td>
-        <td style="padding: 12px; border: 1px solid #ddd;">64.7%</td>
-        <td style="padding: 12px; border: 1px solid #ddd;">+8.9%</td>
+      <tr>
+        <td><strong>10% data</strong></td>
+        <td>45.2%</td>
+        <td><strong>58.1%</strong></td>
+        <td><strong>+12.9%</strong></td>
       </tr>
       <tr>
-        <td style="padding: 12px; border: 1px solid #ddd;">50% data</td>
-        <td style="padding: 12px; border: 1px solid #ddd;">63.4%</td>
-        <td style="padding: 12px; border: 1px solid #ddd;">70.2%</td>
-        <td style="padding: 12px; border: 1px solid #ddd;">+6.8%</td>
+        <td>25% data</td>
+        <td>55.8%</td>
+        <td>64.7%</td>
+        <td>+8.9%</td>
       </tr>
-      <tr style="background-color: #f9f9f9;">
-        <td style="padding: 12px; border: 1px solid #ddd;">100% data</td>
-        <td style="padding: 12px; border: 1px solid #ddd;">70.9%</td>
-        <td style="padding: 12px; border: 1px solid #ddd;">75.0%</td>
-        <td style="padding: 12px; border: 1px solid #ddd;">+4.1%</td>
+      <tr>
+        <td>50% data</td>
+        <td>63.4%</td>
+        <td>70.2%</td>
+        <td>+6.8%</td>
+      </tr>
+      <tr>
+        <td>100% data</td>
+        <td>70.9%</td>
+        <td>75.0%</td>
+        <td>+4.1%</td>
       </tr>
     </tbody>
   </table>
@@ -163,34 +163,34 @@ The GAN implementation features custom architectures for both generator and disc
 
 Three different GAN variants were implemented and evaluated both for sample quality (FID) and classification utility:
 
-<div style="text-align: center;">
-  <table class="table" style="width: 85%; margin: 0 auto; border-collapse: collapse; border: 1px solid #ddd;">
+<div class="table-responsive">
+  <table class="table">
     <thead>
-      <tr style="background-color: #f2f2f2;">
-        <th style="padding: 12px; border: 1px solid #ddd;">Model</th>
-        <th style="padding: 12px; border: 1px solid #ddd;">FID Score</th>
-        <th style="padding: 12px; border: 1px solid #ddd;">Training Stability</th>
-        <th style="padding: 12px; border: 1px solid #ddd;">Classification Gain</th>
+      <tr>
+        <th>Model</th>
+        <th>FID Score</th>
+        <th>Training Stability</th>
+        <th>Classification Gain</th>
       </tr>
     </thead>
     <tbody>
       <tr>
-        <td style="padding: 12px; border: 1px solid #ddd;">Vanilla GAN</td>
-        <td style="padding: 12px; border: 1px solid #ddd;">104.62</td>
-        <td style="padding: 12px; border: 1px solid #ddd;">Unstable</td>
-        <td style="padding: 12px; border: 1px solid #ddd;">+1.0%</td>
-      </tr>
-      <tr style="background-color: #f9f9f9;">
-        <td style="padding: 12px; border: 1px solid #ddd;">LSGAN</td>
-        <td style="padding: 12px; border: 1px solid #ddd;">52.48</td>
-        <td style="padding: 12px; border: 1px solid #ddd;">More Stable</td>
-        <td style="padding: 12px; border: 1px solid #ddd;">+2.5%</td>
+        <td>Vanilla GAN</td>
+        <td>104.62</td>
+        <td>Unstable</td>
+        <td>+1.0%</td>
       </tr>
       <tr>
-        <td style="padding: 12px; border: 1px solid #ddd;"><strong>WGAN-GP</strong></td>
-        <td style="padding: 12px; border: 1px solid #ddd;"><strong>33.07</strong></td>
-        <td style="padding: 12px; border: 1px solid #ddd;">Stable</td>
-        <td style="padding: 12px; border: 1px solid #ddd;"><strong>+3.6%</strong></td>
+        <td>LSGAN</td>
+        <td>52.48</td>
+        <td>More Stable</td>
+        <td>+2.5%</td>
+      </tr>
+      <tr>
+        <td><strong>WGAN-GP</strong></td>
+        <td><strong>33.07</strong></td>
+        <td>Stable</td>
+        <td><strong>+3.6%</strong></td>
       </tr>
     </tbody>
   </table>
@@ -265,28 +265,28 @@ The diffusion model implementation focused on the inference process, using a pre
 
 Two sampling approaches were implemented and evaluated:
 
-<div style="text-align: center;">
-  <table class="table" style="width: 80%; margin: 0 auto; border-collapse: collapse; border: 1px solid #ddd;">
+<div class="table-responsive">
+  <table class="table">
     <thead>
-      <tr style="background-color: #f2f2f2;">
-        <th style="padding: 12px; border: 1px solid #ddd;">Model</th>
-        <th style="padding: 12px; border: 1px solid #ddd;">FID Score</th>
-        <th style="padding: 12px; border: 1px solid #ddd;">Sampling Speed</th>
-        <th style="padding: 12px; border: 1px solid #ddd;">Classification Gain</th>
+      <tr>
+        <th>Model</th>
+        <th>FID Score</th>
+        <th>Sampling Speed</th>
+        <th>Classification Gain</th>
       </tr>
     </thead>
     <tbody>
-      <tr style="background-color: #fff3cd;">
-        <td style="padding: 12px; border: 1px solid #ddd;"><strong>DDPM</strong></td>
-        <td style="padding: 12px; border: 1px solid #ddd;"><strong>34.73</strong></td>
-        <td style="padding: 12px; border: 1px solid #ddd;">Slow (1000 steps)</td>
-        <td style="padding: 12px; border: 1px solid #ddd;"><strong>+5.1%</strong></td>
+      <tr>
+        <td><strong>DDPM</strong></td>
+        <td><strong>34.73</strong></td>
+        <td>Slow (1000 steps)</td>
+        <td><strong>+5.1%</strong></td>
       </tr>
-      <tr style="background-color: #f9f9f9;">
-        <td style="padding: 12px; border: 1px solid #ddd;">DDIM</td>
-        <td style="padding: 12px; border: 1px solid #ddd;">38.32</td>
-        <td style="padding: 12px; border: 1px solid #ddd;">Fast (100 steps)</td>
-        <td style="padding: 12px; border: 1px solid #ddd;">+4.7%</td>
+      <tr>
+        <td>DDIM</td>
+        <td>38.32</td>
+        <td>Fast (100 steps)</td>
+        <td>+4.7%</td>
       </tr>
     </tbody>
   </table>
