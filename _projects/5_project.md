@@ -1,9 +1,9 @@
 ---
 layout: page
-title: GenAI for Synthetic Data Augmentation: GANs, VAEs & Diffusion Models
+title: GenAI for Synthetic Data Augmentation GANs, VAEs & Diffusion Models
 description: Validating synthetic data augmentation for computer vision with measurable accuracy improvements in bird species classification
 img: assets/img/project-5/hero.png
-importance: 5
+importance: 7
 category: work
 related_publications: false
 ---
@@ -85,7 +85,7 @@ The GAN implementation features custom architectures for both generator and disc
 
 <div class="row justify-content-sm-center">
     <div class="col-sm-8 mt-3 mt-md-0">
-        {% include figure.liquid path="assets/img/project-5/gan_figure.png" title="GAN Architecture" class="img-fluid rounded z-depth-1" %}
+        <img src="/assets/img/project-5/gan_figure.png" alt="GAN Architecture" class="img-fluid rounded z-depth-1">
     </div>
 </div>
 <div class="caption">
@@ -107,10 +107,10 @@ The most sophisticated implementation utilized the Wasserstein distance with gra
 
 <div class="row">
     <div class="col-sm mt-3 mt-md-0">
-        {% include figure.liquid loading="eager" path="assets/img/project-5/WGAN-GP Samples.png" title="WGAN-GP Samples" class="img-fluid rounded z-depth-1" %}
+        <img src="/assets/img/project-5/WGAN-GP Samples.png" alt="WGAN-GP Samples" class="img-fluid rounded z-depth-1">
     </div>
     <div class="col-sm mt-3 mt-md-0">
-        {% include figure.liquid loading="eager" path="assets/img/project-5/WGAN-GP Latent Space Interpolations.png" title="WGAN-GP Interpolations" class="img-fluid rounded z-depth-1" %}
+        <img src="/assets/img/project-5/WGAN-GP Latent Space Interpolations.png" alt="WGAN-GP Interpolations" class="img-fluid rounded z-depth-1">
     </div>
 </div>
 <div class="caption">
@@ -133,7 +133,7 @@ A standard VAE architecture was implemented with several key components:
 
 <div class="row justify-content-sm-center">
     <div class="col-sm-8 mt-3 mt-md-0">
-        {% include figure.liquid path="assets/img/project-5/vae_figure.png" title="VAE Architecture" class="img-fluid rounded z-depth-1" %}
+        <img src="/assets/img/project-5/vae_figure.png" alt="VAE Architecture" class="img-fluid rounded z-depth-1">
     </div>
 </div>
 <div class="caption">
@@ -150,10 +150,10 @@ To optimize the balance between reconstruction accuracy and latent space regular
 
 <div class="row">
     <div class="col-sm mt-3 mt-md-0">
-        {% include figure.liquid loading="eager" path="assets/img/project-5/Recon. Loss: β annealed.png" title="Reconstruction Loss" class="img-fluid rounded z-depth-1" %}
+        <img src="/assets/img/project-5/Recon. Loss: β annealed.png" alt="Reconstruction Loss" class="img-fluid rounded z-depth-1">
     </div>
     <div class="col-sm mt-3 mt-md-0">
-        {% include figure.liquid loading="eager" path="assets/img/project-5/Samples: β annealed.png" title="VAE Samples" class="img-fluid rounded z-depth-1" %}
+        <img src="/assets/img/project-5/Samples: β annealed.png" alt="VAE Samples" class="img-fluid rounded z-depth-1">
     </div>
 </div>
 <div class="caption">
@@ -175,7 +175,7 @@ The diffusion model implementation focused on the inference process, using a pre
 
 <div class="row justify-content-sm-center">
     <div class="col-sm-8 mt-3 mt-md-0">
-        {% include figure.liquid path="assets/img/project-5/diffusion_figure.png" title="Diffusion Model" class="img-fluid rounded z-depth-1" %}
+        <img src="/assets/img/project-5/diffusion_figure.png" alt="Diffusion Model" class="img-fluid rounded z-depth-1">
     </div>
 </div>
 <div class="caption">
@@ -192,10 +192,10 @@ Two sampling approaches were implemented and evaluated:
 
 <div class="row">
     <div class="col-sm mt-3 mt-md-0">
-        {% include figure.liquid loading="eager" path="assets/img/project-5/DDPM Samples.png" title="DDPM Samples" class="img-fluid rounded z-depth-1" %}
+        <img src="/assets/img/project-5/DDPM Samples.png" alt="DDPM Samples" class="img-fluid rounded z-depth-1">
     </div>
     <div class="col-sm mt-3 mt-md-0">
-        {% include figure.liquid loading="eager" path="assets/img/project-5/DDIM Samples.png" title="DDIM Samples" class="img-fluid rounded z-depth-1" %}
+        <img src="/assets/img/project-5/DDIM Samples.png" alt="DDIM Samples" class="img-fluid rounded z-depth-1">
     </div>
 </div>
 <div class="caption">
@@ -252,4 +252,4 @@ This research project demonstrates end-to-end validation of synthetic data augme
 
 ## Project Repository
 
-[GenVision: Synthetic Data Augmentation](https://github.com/Srecharan/GenVision.git) 
+[GenVision: Synthetic Data Augmentation](https://github.com/Srecharan/GenVision.git)
