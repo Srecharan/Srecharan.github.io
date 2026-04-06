@@ -1,4 +1,0 @@
-User-agent: *
-Disallow:
-
-Sitemap: https://Srecharan.github.io/sitemap.xml
